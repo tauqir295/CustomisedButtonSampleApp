@@ -1,2 +1,2 @@
-include ':app'
+include ':app',  ':mobile-design-library'
 rootProject.name = "CustomisedButtonSampleApp"
