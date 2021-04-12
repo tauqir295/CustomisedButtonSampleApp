@@ -69,18 +69,29 @@ class CustomizableGenericButton @JvmOverloads constructor(context: Context, attr
             }
 
             subtitleTv?.apply {
-                visibility = if (it.getBoolean(R.styleable.CustomizedButton_subtitleVisible, false)) {
-                    View.VISIBLE
+                if (it.getBoolean(R.styleable.CustomizedButton_subtitleVisible, false)) {
+                    visibility = View.VISIBLE
                 } else {
-                    View.GONE
+                    visibility = View.GONE
+
+//                    val density = context.resources.displayMetrics.density
+//                    val paddingPixel = (8 * density).toInt()
+////                    titleTv?.setPadding(paddingPixel,paddingPixel,paddingPixel,paddingPixel)
+//
+//
+//                    val params = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+//                    val margin = resources.getDimensionPixelSize(R.dimen.dimen_16dp)
+//                    params.setMargins(margin, margin, margin, margin)
+////                    titleTv?.layoutParams = params
                 }
             }
 
             container?.apply {
 
-//                background = ContextCompat.getDrawable(context, it.getResourceId(R.styleable.CustomizedButton_backgroundImage, R.drawable.round_corner))
+                background = ContextCompat.getDrawable(context, it.getResourceId(R.styleable.CustomizedButton_backgroundImage, R.drawable.round_corner))
 //                background = it.getDrawable(R.styleable.CustomizedButton_backgroundImage)
             }
+
         }
     }
 }
