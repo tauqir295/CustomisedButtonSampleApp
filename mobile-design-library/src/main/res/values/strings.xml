@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="button_title">Button Title</string>
+    <string name="button_subtitle">Button Subtitle</string>
+</resources>

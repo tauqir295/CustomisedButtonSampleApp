@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="width" format="dimension" />
+    <attr name="height" format="dimension" />
+    <attr name="buttonTitleText" format="string" />
+    <attr name="buttonSubtitleText" format="string" />
+    <attr name="buttonTitleTextColor" format="dimension" />
+    <attr name="buttonSubtitleTextColor" format="dimension" />
+    <attr name="buttonTitleTextSize" format="dimension" />
+    <attr name="buttonSubtitleTextSize" format="dimension" />
+    <attr name="icon" format="reference" />
+    <attr name="iconTintColor" format="color" />
+
+    <declare-styleable name="CustomizedButton">
+        <attr name="width" />
+        <attr name="height" />
+        <attr name="buttonTitleTextColor" />
+        <attr name="buttonSubtitleTextColor" />
+        <attr name="icon" />
+        <attr name="iconTintColor" />
+        <attr name="buttonTitleText" />
+        <attr name="buttonSubtitleText" />
+        <attr name="buttonTitleTextSize" />
+        <attr name="buttonSubtitleTextSize" />
+        <attr name="backgroundImage" format="reference" />
+        <attr name="backgroundColor" format="color" />
+        <attr name="iconVisible" format="boolean" />
+        <attr name="subtitleVisible" format="boolean" />
+    </declare-styleable>
+
+</resources>
