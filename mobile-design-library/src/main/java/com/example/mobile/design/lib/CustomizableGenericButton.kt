@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -15,25 +16,23 @@ class CustomizableGenericButton @JvmOverloads constructor(context: Context, attr
     private var customizedIv: ImageView? = null
     private var titleTv: TextView? = null
     private var subtitleTv: TextView? = null
-    private var iconDrawable: Drawable? = null
-    private var container: ConstraintLayout? = null
+    private var container: LinearLayout? = null
 
     var customizedButtonIconDrawable: Drawable?
-        get() = iconDrawable
+        get() = customizedIv?.drawable
         set(value) {
             value?.let {
-                iconDrawable = it
                 customizedIv?.setImageDrawable(it)
             }
         }
 
-    private var titleText: String?
+    var titleText: String?
         get() = titleTv?.text?.toString()
         set(value) {
             titleTv?.text = value
         }
 
-    private var subtitleText: String?
+    var subtitleText: String?
         get() = subtitleTv?.text?.toString()
         set(value) {
             subtitleTv?.text = value
@@ -55,7 +54,7 @@ class CustomizableGenericButton @JvmOverloads constructor(context: Context, attr
     private fun initAttrs(attrs: AttributeSet, defStyle: Int) {
         context.theme.obtainStyledAttributes(attrs, R.styleable.CustomizedButton, defStyle, 0).use {
 
-            iconDrawable = it.getDrawable(R.styleable.CustomizedButton_icon)
+            customizedButtonIconDrawable = it.getDrawable(R.styleable.CustomizedButton_icon)
 
             titleText = it.getString(R.styleable.CustomizedButton_buttonTitleText)
             subtitleText = it.getString(R.styleable.CustomizedButton_buttonSubtitleText)
@@ -66,6 +65,7 @@ class CustomizableGenericButton @JvmOverloads constructor(context: Context, attr
                 } else {
                     View.GONE
                 }
+                setImageDrawable(customizedButtonIconDrawable)
             }
 
             subtitleTv?.apply {
@@ -78,9 +78,16 @@ class CustomizableGenericButton @JvmOverloads constructor(context: Context, attr
 
             container?.apply {
 
-//                background = ContextCompat.getDrawable(context, it.getResourceId(R.styleable.CustomizedButton_backgroundImage, R.drawable.round_corner))
-//                background = it.getDrawable(R.styleable.CustomizedButton_backgroundImage)
+                background = ContextCompat.getDrawable(context, it.getResourceId(R.styleable.CustomizedButton_backgroundImage, R.drawable.round_corner))
             }
         }
+    }
+
+    /**
+     * Update the view rendered. Use this in case of button is getting distorted
+     */
+    fun refreshView() {
+        invalidate()
+        requestLayout()
     }
 }

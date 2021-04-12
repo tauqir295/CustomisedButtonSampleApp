@@ -44,7 +44,6 @@
     </style>
 
     <style name="CustomisedButton" >
-        <item name="android:textSize">?attr/buttonTitleTextSize</item>
         <item name="android:textColor">?attr/buttonTitleTextColor</item>
     </style>
 
