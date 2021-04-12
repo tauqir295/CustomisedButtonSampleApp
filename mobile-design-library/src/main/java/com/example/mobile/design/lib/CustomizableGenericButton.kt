@@ -9,9 +9,14 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.res.use
 
-class CustomizableGenericButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : ConstraintLayout(context, attrs, defStyle) {
+class CustomizableGenericButton @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyle: Int = 0
+) : ConstraintLayout(context, attrs, defStyle) {
 
     private var customizedIv: ImageView? = null
     private var titleTv: TextView? = null
@@ -60,25 +65,57 @@ class CustomizableGenericButton @JvmOverloads constructor(context: Context, attr
             subtitleText = it.getString(R.styleable.CustomizedButton_buttonSubtitleText)
 
             customizedIv?.apply {
+                background = ResourcesCompat.getDrawable(
+                    resources,
+                    it.getResourceId(R.styleable.CustomizedButton_icon, R.drawable.round_corner),
+                    context.theme
+                )
+                setColorFilter(
+                    it.getColor(
+                        R.styleable.CustomizedButton_iconTintColor,
+                        context.getColorFromAttr(R.attr.colorOnSecondary)
+                    )
+                )
+
                 visibility = if (it.getBoolean(R.styleable.CustomizedButton_iconVisible, false)) {
                     View.VISIBLE
                 } else {
                     View.GONE
                 }
-                setImageDrawable(customizedButtonIconDrawable)
+            }
+
+            titleTv?.apply {
+                setTextColor(
+                    it.getColor(
+                        R.styleable.CustomizedButton_buttonTitleTextColor,
+                        context.getColorFromAttr(R.attr.defaultTextColor)
+                    )
+                )
             }
 
             subtitleTv?.apply {
-                visibility = if (it.getBoolean(R.styleable.CustomizedButton_subtitleVisible, false)) {
-                    View.VISIBLE
-                } else {
-                    View.GONE
-                }
+                setTextColor(
+                    it.getColor(
+                        R.styleable.CustomizedButton_buttonSubtitleTextColor,
+                        context.getColorFromAttr(R.attr.defaultTextColor)
+                    )
+                )
+                visibility =
+                    if (it.getBoolean(R.styleable.CustomizedButton_subtitleVisible, false)) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
             }
 
             container?.apply {
-
-                background = ContextCompat.getDrawable(context, it.getResourceId(R.styleable.CustomizedButton_backgroundImage, R.drawable.round_corner))
+                background = ContextCompat.getDrawable(
+                    context,
+                    it.getResourceId(
+                        R.styleable.CustomizedButton_backgroundImage,
+                        R.drawable.round_corner
+                    )
+                )
             }
         }
     }

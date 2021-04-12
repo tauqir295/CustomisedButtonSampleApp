@@ -5,12 +5,14 @@
     <attr name="height" format="dimension" />
     <attr name="buttonTitleText" format="string" />
     <attr name="buttonSubtitleText" format="string" />
-    <attr name="buttonTitleTextColor" format="dimension" />
-    <attr name="buttonSubtitleTextColor" format="dimension" />
+    <attr name="buttonTitleTextColor" format="color" />
+    <attr name="buttonSubtitleTextColor" format="color" />
     <attr name="buttonTitleTextSize" format="dimension" />
     <attr name="buttonSubtitleTextSize" format="dimension" />
     <attr name="icon" format="reference" />
     <attr name="iconTintColor" format="color" />
+    <attr name="inputTextColor" format="color" />
+    <attr name="defaultTextColor" format="color" />
 
     <declare-styleable name="CustomizedButton">
         <attr name="width" />
