@@ -29,6 +29,12 @@
         <attr name="backgroundColor" format="color" />
         <attr name="iconVisible" format="boolean" />
         <attr name="subtitleVisible" format="boolean" />
+        <attr name="buttonState">
+            <flag name="disabled" value="0" />
+            <flag name="enabled" value="1" />
+            <flag name="pressed" value="2" />
+            <flag name="selected" value="3" />
+        </attr>
     </declare-styleable>
 
 </resources>

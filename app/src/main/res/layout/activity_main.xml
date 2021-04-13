@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/dimen_16dp"
         android:orientation="vertical"
-        tools:context=".MainActivity">
+        tools:context=".home.MainActivity">
 
         <com.example.mobile.design.lib.CustomizableGenericButton
             android:id="@+id/button1"
@@ -21,7 +21,7 @@
             app:backgroundImage="@drawable/round_corner"
             app:buttonSubtitleText="ButtonSubtitle"
             app:buttonTitleText="ButtonTitle"
-            app:icon="@drawable/ic_user"
+            app:icon="@drawable/ic_settings"
             app:iconTintColor="@color/purple_700"
             app:iconVisible="true"
             app:layout_constraintStart_toStartOf="parent"

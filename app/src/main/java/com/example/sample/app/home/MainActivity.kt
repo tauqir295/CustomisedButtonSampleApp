@@ -1,9 +1,10 @@
-package com.example.sample.app
+package com.example.sample.app.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.mobile.design.lib.CustomizableGenericButton
+import com.example.sample.app.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

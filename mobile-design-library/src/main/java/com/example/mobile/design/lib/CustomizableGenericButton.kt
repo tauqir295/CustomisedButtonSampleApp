@@ -1,7 +1,10 @@
 package com.example.mobile.design.lib
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.ShapeDrawable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
@@ -13,9 +16,9 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.res.use
 
 class CustomizableGenericButton @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyle: Int = 0
+        context: Context,
+        private val attrs: AttributeSet? = null,
+        private val defStyle: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle) {
 
     private var customizedIv: ImageView? = null
@@ -84,9 +87,9 @@ class CustomizableGenericButton @JvmOverloads constructor(
 
             customizedIv?.apply {
                 iconDrawable = ResourcesCompat.getDrawable(
-                    resources,
-                    it.getResourceId(R.styleable.CustomizedButton_icon, R.drawable.round_corner),
-                    context.theme
+                        resources,
+                        it.getResourceId(R.styleable.CustomizedButton_icon, R.drawable.round_corner),
+                        context.theme
                 )
 
                 iconVisibility = it.getBoolean(R.styleable.CustomizedButton_iconVisible, false)
@@ -95,31 +98,66 @@ class CustomizableGenericButton @JvmOverloads constructor(
 
             titleTv?.apply {
                 setTextColor(
-                    it.getColor(
-                        R.styleable.CustomizedButton_buttonTitleTextColor,
-                        context.getColorFromAttr(R.attr.defaultTextColor)
-                    )
+                        it.getColor(
+                                R.styleable.CustomizedButton_buttonTitleTextColor,
+                                context.getColorFromAttr(R.attr.defaultTextColor)
+                        )
                 )
             }
 
             subtitleTv?.apply {
                 setTextColor(
-                    it.getColor(
-                        R.styleable.CustomizedButton_buttonSubtitleTextColor,
-                        context.getColorFromAttr(R.attr.defaultTextColor)
-                    )
+                        it.getColor(
+                                R.styleable.CustomizedButton_buttonSubtitleTextColor,
+                                context.getColorFromAttr(R.attr.defaultTextColor)
+                        )
                 )
                 subtitleTvVisibility = it.getBoolean(R.styleable.CustomizedButton_subtitleVisible, false)
             }
 
+            setButtonState(it.getInteger(R.styleable.CustomizedButton_buttonState, 0))
+        }
+    }
+
+    private fun getColorBasedOnState(value: Int): Int {
+
+        return when(value) {
+            0 -> R.color.disabledColor
+            1 -> R.color.enabledColor
+            2 -> R.color.pressedColor
+            3 -> R.color.selectedColor
+            else -> -1
+        }
+    }
+
+    fun setButtonState(value: Int) {
+        context.theme.obtainStyledAttributes(attrs, R.styleable.CustomizedButton, defStyle, 0).use {
             container?.apply {
-                background = ContextCompat.getDrawable(
-                    context,
-                    it.getResourceId(
-                        R.styleable.CustomizedButton_backgroundImage,
-                        R.drawable.round_corner
-                    )
+
+                val color = getColorBasedOnState(value)
+
+                val imageDrawable = ContextCompat.getDrawable(
+                        context,
+                        it.getResourceId(
+                                R.styleable.CustomizedButton_backgroundImage,
+                                R.drawable.button_border
+                        )
                 )
+
+                when (imageDrawable) {
+                    is ShapeDrawable -> {
+                        imageDrawable.paint.color = ContextCompat.getColor(context, color)
+                    }
+                    is GradientDrawable -> {
+                        imageDrawable.setColor(ContextCompat.getColor(context, color))
+                    }
+                    is ColorDrawable -> {
+                        imageDrawable.color = ContextCompat.getColor(context, color)
+                    }
+                }
+
+                background = imageDrawable
+
             }
         }
     }
