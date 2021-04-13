@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_16dp"
-            app:backgroundImage="@drawable/button_border"
+            app:backgroundImage="@drawable/button_faded"
             app:buttonTitleText="Logout"
             app:buttonTitleTextColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_16dp"
             android:onClick="@{() -> viewModel.loginUser()}"
-            app:backgroundImage="@drawable/button_border"
+            app:backgroundImage="@drawable/button_faded"
             app:buttonTitleText="Login"
             app:buttonTitleTextColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"

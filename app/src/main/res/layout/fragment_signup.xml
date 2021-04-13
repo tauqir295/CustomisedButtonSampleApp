@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_16dp"
             android:onClick="@{() -> viewModel.registerUser(loginButton)}"
-            app:backgroundImage="@drawable/button_border"
+            app:backgroundImage="@drawable/button_selector"
             app:buttonState="disabled"
             app:buttonTitleText="Register"
             app:buttonTitleTextColor="@color/white"

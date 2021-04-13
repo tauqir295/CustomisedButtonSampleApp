@@ -26,16 +26,9 @@ class SignUpViewModel @Inject constructor(private val repository: SignUpReposito
     }
 
     fun onTextChanged(fullName: String?, userName: String?, password: String?, view: View) {
-
-        println("$fullName $userName $password")
-        var buttonState = 0
-        buttonState = if (fullName?.isNotEmpty() == true && userName?.isNotEmpty() == true && password?.isNotEmpty() == true) {
-            1
-        } else {
-            0
+        (view as CustomizableGenericButton).apply {
+            isPressed = !(fullName?.isNotEmpty() == true && userName?.isNotEmpty() == true && password?.isNotEmpty() == true)
         }
-
-        (view as CustomizableGenericButton).setButtonState(buttonState)
 
     }
 }

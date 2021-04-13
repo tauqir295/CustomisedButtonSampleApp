@@ -1,17 +1,13 @@
 package com.example.mobile.design.lib
 
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.ShapeDrawable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.res.use
 
@@ -53,7 +49,7 @@ class CustomizableGenericButton @JvmOverloads constructor(
             } else {
                 View.GONE
             }
-            field = false
+            field = isVisible
         }
 
     var subtitleTvVisibility = false
@@ -63,7 +59,7 @@ class CustomizableGenericButton @JvmOverloads constructor(
             } else {
                 View.GONE
             }
-            field = false
+            field = isVisible
         }
 
     init {
@@ -115,52 +111,13 @@ class CustomizableGenericButton @JvmOverloads constructor(
                 subtitleTvVisibility = it.getBoolean(R.styleable.CustomizedButton_subtitleVisible, false)
             }
 
-            setButtonState(it.getInteger(R.styleable.CustomizedButton_buttonState, 0))
-        }
-    }
-
-    private fun getColorBasedOnState(value: Int): Int {
-
-        return when(value) {
-            0 -> R.color.disabledColor
-            1 -> R.color.enabledColor
-            2 -> R.color.pressedColor
-            3 -> R.color.selectedColor
-            else -> -1
-        }
-    }
-
-    fun setButtonState(value: Int) {
-        context.theme.obtainStyledAttributes(attrs, R.styleable.CustomizedButton, defStyle, 0).use {
             container?.apply {
-
-                val color = getColorBasedOnState(value)
-
-                val imageDrawable = ContextCompat.getDrawable(
-                        context,
-                        it.getResourceId(
-                                R.styleable.CustomizedButton_backgroundImage,
-                                R.drawable.button_border
-                        )
-                )
-
-                when (imageDrawable) {
-                    is ShapeDrawable -> {
-                        imageDrawable.paint.color = ContextCompat.getColor(context, color)
-                    }
-                    is GradientDrawable -> {
-                        imageDrawable.setColor(ContextCompat.getColor(context, color))
-                    }
-                    is ColorDrawable -> {
-                        imageDrawable.color = ContextCompat.getColor(context, color)
-                    }
-                }
-
-                background = imageDrawable
-
+                isPressed = true
+                background = it.getDrawable(R.styleable.CustomizedButton_backgroundImage)
             }
         }
     }
+
 
     /**
      * Update the view rendered. Use this in case of button is getting distorted
