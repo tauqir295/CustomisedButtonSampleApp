@@ -7,75 +7,81 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/dimen_16dp"
-        android:orientation="vertical"
-        tools:context=".home.MainActivity">
+        android:layout_height="match_parent">
 
-        <com.example.mobile.design.lib.CustomizableGenericButton
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:buttonSubtitleText="ButtonSubtitle"
-            app:buttonTitleText="ButtonTitle"
-            app:icon="@drawable/ic_settings"
-            app:iconTintColor="@color/purple_700"
-            app:iconVisible="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:subtitleVisible="true" />
+            android:layout_margin="@dimen/dimen_16dp"
+            android:orientation="vertical"
+            tools:context=".home.MainActivity">
 
-        <com.example.mobile.design.lib.CustomizableGenericButton
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_16dp"
-            app:buttonSubtitleText="ButtonSubtitle"
-            app:buttonTitleText="ButtonTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button1"
-            app:subtitleVisible="true" />
+            <com.example.mobile.design.lib.CustomizableGenericButton
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:buttonSubtitleText="ButtonSubtitle"
+                app:buttonTitleText="ButtonTitle"
+                app:icon="@drawable/ic_settings"
+                app:iconTintColor="@color/purple_700"
+                app:iconVisible="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:subtitleVisible="true" />
 
-        <com.example.mobile.design.lib.CustomizableGenericButton
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_16dp"
-            app:buttonSubtitleText="ButtonSubtitle"
-            app:buttonTitleText="ButtonTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button2" />
+            <com.example.mobile.design.lib.CustomizableGenericButton
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                app:buttonSubtitleText="ButtonSubtitle"
+                app:buttonTitleText="ButtonTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button1"
+                app:subtitleVisible="true" />
 
-        <com.example.mobile.design.lib.CustomizableGenericButton
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button3" />
+            <com.example.mobile.design.lib.CustomizableGenericButton
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                app:buttonSubtitleText="ButtonSubtitle"
+                app:buttonTitleText="ButtonTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button2" />
 
-        <com.example.mobile.design.lib.CustomizableGenericButton
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button4" />
+            <com.example.mobile.design.lib.CustomizableGenericButton
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button3" />
 
-        <com.example.mobile.design.lib.CustomizableGenericButton
-            android:id="@+id/button6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_16dp"
-            app:buttonTitleText="Logout"
-            app:buttonState="enabled"
-            app:buttonTitleTextColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button5" />
+            <com.example.mobile.design.lib.CustomizableGenericButton
+                android:id="@+id/button5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button4" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.example.mobile.design.lib.CustomizableGenericButton
+                android:id="@+id/button6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_40dp"
+                android:layout_marginBottom="@dimen/dimen_40dp"
+                app:buttonState="enabled"
+                app:buttonTitleText="Logout"
+                app:buttonTitleTextColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

@@ -13,8 +13,8 @@ import androidx.core.content.res.use
 
 class CustomizableGenericButton @JvmOverloads constructor(
         context: Context,
-        private val attrs: AttributeSet? = null,
-        private val defStyle: Int = 0
+        attrs: AttributeSet? = null,
+        defStyle: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle) {
 
     private var customizedIv: ImageView? = null
@@ -132,7 +132,7 @@ class CustomizableGenericButton @JvmOverloads constructor(
                     ResourcesCompat.getDrawable(context.resources, R.drawable.button_faded, context.resources.newTheme())
                 }
                 else -> {
-                    ResourcesCompat.getDrawable(context.resources, R.drawable.button_highlighted, context.resources.newTheme())
+                    ResourcesCompat.getDrawable(context.resources, R.drawable.button_selector, context.resources.newTheme())
                 }
             }
         }

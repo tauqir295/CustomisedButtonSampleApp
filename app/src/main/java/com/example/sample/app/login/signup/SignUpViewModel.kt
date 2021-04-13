@@ -48,9 +48,9 @@ class SignUpViewModel @Inject constructor(private val repository: SignUpReposito
     fun onTextChanged(fullName: String?, userName: String?, password: String?, view: View) {
         (view as CustomizableGenericButton).apply {
             buttonState = if ((fullName?.isNotEmpty() == true && userName?.isNotEmpty() == true && password?.isNotEmpty() == true)) {
-                1
+                2
             } else {
-                0
+                1
             }
         }
     }
