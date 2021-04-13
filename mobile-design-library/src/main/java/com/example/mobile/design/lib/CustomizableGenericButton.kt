@@ -23,24 +23,44 @@ class CustomizableGenericButton @JvmOverloads constructor(
     private var subtitleTv: TextView? = null
     private var container: LinearLayout? = null
 
-    var customizedButtonIconDrawable: Drawable?
+    var iconDrawable: Drawable?
         get() = customizedIv?.drawable
-        set(value) {
-            value?.let {
-                customizedIv?.setImageDrawable(it)
+        set(drawable) {
+            drawable?.let {
+                customizedIv?.background = it
             }
         }
 
     var titleText: String?
         get() = titleTv?.text?.toString()
-        set(value) {
-            titleTv?.text = value
+        set(text) {
+            titleTv?.text = text
         }
 
     var subtitleText: String?
         get() = subtitleTv?.text?.toString()
-        set(value) {
-            subtitleTv?.text = value
+        set(text) {
+            subtitleTv?.text = text
+        }
+
+    var iconVisibility = false
+        set(isVisible) {
+            customizedIv?.visibility = if (isVisible) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+            field = false
+        }
+
+    var subtitleTvVisibility = false
+        set(isVisible) {
+            subtitleTv?.visibility = if (isVisible) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+            field = false
         }
 
     init {
@@ -59,29 +79,18 @@ class CustomizableGenericButton @JvmOverloads constructor(
     private fun initAttrs(attrs: AttributeSet, defStyle: Int) {
         context.theme.obtainStyledAttributes(attrs, R.styleable.CustomizedButton, defStyle, 0).use {
 
-            customizedButtonIconDrawable = it.getDrawable(R.styleable.CustomizedButton_icon)
-
             titleText = it.getString(R.styleable.CustomizedButton_buttonTitleText)
             subtitleText = it.getString(R.styleable.CustomizedButton_buttonSubtitleText)
 
             customizedIv?.apply {
-                background = ResourcesCompat.getDrawable(
+                iconDrawable = ResourcesCompat.getDrawable(
                     resources,
                     it.getResourceId(R.styleable.CustomizedButton_icon, R.drawable.round_corner),
                     context.theme
                 )
-                setColorFilter(
-                    it.getColor(
-                        R.styleable.CustomizedButton_iconTintColor,
-                        context.getColorFromAttr(R.attr.colorOnSecondary)
-                    )
-                )
 
-                visibility = if (it.getBoolean(R.styleable.CustomizedButton_iconVisible, false)) {
-                    View.VISIBLE
-                } else {
-                    View.GONE
-                }
+                iconVisibility = it.getBoolean(R.styleable.CustomizedButton_iconVisible, false)
+
             }
 
             titleTv?.apply {
@@ -100,12 +109,7 @@ class CustomizableGenericButton @JvmOverloads constructor(
                         context.getColorFromAttr(R.attr.defaultTextColor)
                     )
                 )
-                visibility =
-                    if (it.getBoolean(R.styleable.CustomizedButton_subtitleVisible, false)) {
-                        View.VISIBLE
-                    } else {
-                        View.GONE
-                    }
+                subtitleTvVisibility = it.getBoolean(R.styleable.CustomizedButton_subtitleVisible, false)
             }
 
             container?.apply {
