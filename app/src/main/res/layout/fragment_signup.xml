@@ -7,7 +7,7 @@
         <variable
             name="viewModel"
             type="com.example.sample.app.login.signup.SignUpViewModel" />
-        <import type="android.text.TextUtils" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,54 +20,56 @@
             android:id="@+id/fullNameEt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:autofillHints="@null"
             android:background="@drawable/round_corner"
             android:hint="@string/prompt_full_name"
             android:inputType="text"
+            android:onTextChanged="@{(text, start, before, count) -> viewModel.onTextChanged(text.toString(), viewModel.userName, viewModel.password, loginButton)}"
             android:padding="@dimen/dimen_16dp"
             android:selectAllOnFocus="true"
             android:text="@={viewModel.fullName}"
             android:textColorHint="?attr/inputTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:onTextChanged="@{(text, start, before, count) -> viewModel.onTextChanged(text.toString(), viewModel.userName, viewModel.password, loginButton)}" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/usernameEt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_16dp"
+            android:autofillHints="@null"
             android:background="@drawable/round_corner"
             android:hint="@string/prompt_username"
             android:imeActionLabel="@string/action_sign_in_short"
             android:inputType="text"
+            android:onTextChanged="@{(text, start, before, count) -> viewModel.onTextChanged(viewModel.fullName, text.toString(), viewModel.password, loginButton)}"
             android:padding="@dimen/dimen_16dp"
             android:text="@={viewModel.userName}"
             android:textColorHint="?attr/inputTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fullNameEt"
-            android:onTextChanged="@{(text, start, before, count) -> viewModel.onTextChanged(viewModel.fullName, text.toString(), viewModel.password, loginButton)}" />
+            app:layout_constraintTop_toBottomOf="@+id/fullNameEt" />
 
         <EditText
             android:id="@+id/passwordEt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_16dp"
+            android:autofillHints="@null"
             android:background="@drawable/round_corner"
             android:hint="@string/prompt_password"
             android:imeActionLabel="@string/action_sign_in_short"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
+            android:onTextChanged="@{(text, start, before, count) -> viewModel.onTextChanged(viewModel.fullName, viewModel.userName, text.toString(), loginButton)}"
             android:padding="@dimen/dimen_16dp"
             android:selectAllOnFocus="true"
             android:text="@={viewModel.password}"
             android:textColorHint="?attr/inputTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usernameEt"
-            android:onTextChanged="@{(text, start, before, count) -> viewModel.onTextChanged(viewModel.fullName, viewModel.userName, text.toString(), loginButton)}" />
-
+            app:layout_constraintTop_toBottomOf="@+id/usernameEt" />
 
         <com.example.mobile.design.lib.CustomizableGenericButton
             android:id="@+id/loginButton"
@@ -75,9 +77,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_16dp"
             android:onClick="@{() -> viewModel.registerUser(loginButton)}"
-            app:backgroundImage="@drawable/button_selector"
-            app:buttonState="disabled"
             app:buttonTitleText="Register"
+            app:buttonState="disabled"
             app:buttonTitleTextColor="@color/white"
             app:icon="@drawable/ic_user"
             app:iconTintColor="@color/white"
@@ -88,21 +89,6 @@
             app:layout_constraintTop_toBottomOf="@+id/passwordEt"
             app:layout_constraintVertical_bias="0.3" />
 
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="64dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/usernameEt"
-            app:layout_constraintStart_toStartOf="@+id/usernameEt"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

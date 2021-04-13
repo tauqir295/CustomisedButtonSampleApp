@@ -23,12 +23,35 @@ class SignUpViewModel @Inject constructor(private val repository: SignUpReposito
 
     fun registerUser(view: View) {
 
+        if ((view as CustomizableGenericButton).buttonState == 1) {
+            println("isClickable")
+        }
+        _data.postValue("")
+/*        if (view.isAccessibilityFocused) {
+            GlobalScope.launch {
+                fullName?.let { fullName ->
+                    userName?.let { userName ->
+                        password?.let { password
+                            val encryptedPassword = SecureDataUsingEncryption().encrypt(it)
+                            val user = User(fullName = fullName, userName = userName, password = encryptedPassword )
+                            repository.getUsers()
+                        }
+
+                    }
+                }
+            }
+        } else {
+            view.isPressed = true
+        }*/
     }
 
     fun onTextChanged(fullName: String?, userName: String?, password: String?, view: View) {
         (view as CustomizableGenericButton).apply {
-            isPressed = !(fullName?.isNotEmpty() == true && userName?.isNotEmpty() == true && password?.isNotEmpty() == true)
+            buttonState = if ((fullName?.isNotEmpty() == true && userName?.isNotEmpty() == true && password?.isNotEmpty() == true)) {
+                1
+            } else {
+                0
+            }
         }
-
     }
 }

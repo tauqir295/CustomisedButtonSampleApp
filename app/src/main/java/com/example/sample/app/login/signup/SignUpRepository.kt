@@ -11,12 +11,12 @@ class SignUpRepository @Inject constructor(private val userDao: UserDao) {
     // implement anything else to ensure we're not doing long running database work
     // off the main thread.
     @WorkerThread
-    suspend fun insert(user: User) {
+    fun insert(user: User) {
         userDao.insert(user)
     }
 
     @WorkerThread
-    suspend fun getUsers(): List<User>{
+    fun getUsers(): List<User>{
         return userDao.getAll()
     }
 }

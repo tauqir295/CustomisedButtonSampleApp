@@ -62,6 +62,12 @@ class CustomizableGenericButton @JvmOverloads constructor(
             field = isVisible
         }
 
+    var buttonState = 0
+        set(value) {
+            setBackgroundImage(value)
+            field = value
+        }
+
     init {
         inflate(context, R.layout.customizable_generic_button, this)
 
@@ -111,9 +117,23 @@ class CustomizableGenericButton @JvmOverloads constructor(
                 subtitleTvVisibility = it.getBoolean(R.styleable.CustomizedButton_subtitleVisible, false)
             }
 
-            container?.apply {
-                isPressed = true
-                background = it.getDrawable(R.styleable.CustomizedButton_backgroundImage)
+            setBackgroundImage(it.getInteger(R.styleable.CustomizedButton_buttonState, 0))
+
+        }
+    }
+
+    private fun setBackgroundImage(value: Int) {
+        container?.apply {
+            background = when (value) {
+                0 -> {
+                    ResourcesCompat.getDrawable(context.resources, R.drawable.round_corner, context.resources.newTheme())
+                }
+                1 -> {
+                    ResourcesCompat.getDrawable(context.resources, R.drawable.button_faded, context.resources.newTheme())
+                }
+                else -> {
+                    ResourcesCompat.getDrawable(context.resources, R.drawable.button_highlighted, context.resources.newTheme())
+                }
             }
         }
     }
