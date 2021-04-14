@@ -30,7 +30,7 @@ class SplashActivity: AppCompatActivity(R.layout.activity_splash)  {
             val userDao = appDatabase.userDao()
             val users: List<User> = userDao.getAll()
             intent.putExtra("hasUserSignedUp", users.isNotEmpty())
-            delay(0)
+            delay(1000)
             startActivity(intent)
             finish()
         }

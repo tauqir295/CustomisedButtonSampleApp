@@ -1,10 +1,12 @@
 package com.example.sample.app.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.mobile.design.lib.CustomizableGenericButton
 import com.example.sample.app.R
+import com.example.sample.app.login.ui.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,6 +28,13 @@ class MainActivity : AppCompatActivity() {
             iconDrawable = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_settings)
             iconVisibility = true
             subtitleTvVisibility = true
+        }
+
+        findViewById<CustomizableGenericButton>(R.id.logoutBtn).run {
+            setOnClickListener {
+                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                this@MainActivity.finish()
+            }
         }
     }
 }
