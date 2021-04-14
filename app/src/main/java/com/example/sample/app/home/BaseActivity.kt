@@ -48,4 +48,21 @@ open class BaseActivity: AppCompatActivity() {
         super.onUserInteraction()
         SessionUtils.increaseInteractionCounter()
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.apply {
+            if (timeAppWasInBackground != 0L && System.currentTimeMillis() - timeAppWasInBackground > 10) {
+                logout()
+            }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (viewModel.timeAppWasInBackground == 0L) {
+            viewModel.timeAppWasInBackground = System.currentTimeMillis()
+        }
+
+    }
 }

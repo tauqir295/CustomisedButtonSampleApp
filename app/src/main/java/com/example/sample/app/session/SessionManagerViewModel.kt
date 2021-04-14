@@ -14,6 +14,8 @@ class SessionManagerViewModel @Inject constructor(): ViewModel() {
 
     private val workManager = WorkManager.getInstance()
 
+    var timeAppWasInBackground = 0L
+
     fun startTrackingSession() {
         val save = OneTimeWorkRequest.Builder(SessionWorkManager::class.java)
             .addTag(SESSION_TIMEOUT_TAG)
