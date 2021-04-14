@@ -42,8 +42,8 @@ class SignUpViewModel @Inject constructor(private val repository: DatabaseReposi
                     }
                 }
             }
-            _data.postValue("")
         }
+        _data.postValue("")
     }
 
     fun onTextChanged(fullName: String?, userName: String?, password: String?, view: View) {

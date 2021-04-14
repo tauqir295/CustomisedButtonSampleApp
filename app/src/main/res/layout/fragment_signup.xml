@@ -86,7 +86,6 @@
                 app:buttonTitleText="Register"
                 app:buttonTitleTextColor="@color/white"
                 app:icon="@drawable/ic_user"
-                app:iconTintColor="@color/white"
                 app:iconVisible="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

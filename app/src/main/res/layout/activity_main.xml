@@ -26,7 +26,6 @@
                 app:buttonSubtitleText="ButtonSubtitle"
                 app:buttonTitleText="ButtonTitle"
                 app:icon="@drawable/ic_settings"
-                app:iconTintColor="@color/purple_700"
                 app:iconVisible="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

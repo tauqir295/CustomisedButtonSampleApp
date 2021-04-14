@@ -10,25 +10,26 @@ import androidx.fragment.app.FragmentManager
  * that is defined outside the class.
  *
  * extension method for navigating to other fragment
- *
  */
-fun replaceWithNextFragment(
+fun removeSelfAndReplaceWithNextFragment(
     containerID: Int,
     fragmentManager: FragmentManager?,
-    fragment: Fragment,
+    fragmentToBeRemoved: Fragment,
+    fragmentToBeAdded: Fragment,
     arguments: Bundle?,
     addToBackStack: Boolean = true
 ) {
     arguments.let {
-        fragment.arguments = it
+        fragmentToBeAdded.arguments = it
     }
 
     fragmentManager?.let {
         it.beginTransaction().apply {
-            replace(containerID, fragment)
+            replace(containerID, fragmentToBeAdded)
             if (addToBackStack) {
-                addToBackStack(fragment::class.simpleName)
+                addToBackStack(fragmentToBeAdded::class.simpleName)
             }
+            remove(fragmentToBeRemoved)
             commit()
         }
     }

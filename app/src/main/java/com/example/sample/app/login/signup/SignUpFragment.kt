@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import com.example.sample.app.R
 import com.example.sample.app.databinding.FragmentSignupBinding
 import com.example.sample.app.login.ui.LoginFragment
-import com.example.sample.app.utils.replaceWithNextFragment
+import com.example.sample.app.utils.removeSelfAndReplaceWithNextFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -62,12 +62,13 @@ class SignUpFragment : Fragment() {
     private fun setUpObserver() {
         signUpViewModel.data.observe(viewLifecycleOwner, {
             requireActivity().run {
-                replaceWithNextFragment(
-                    this@SignUpFragment.id,
-                    supportFragmentManager,
-                    LoginFragment.newInstance(),
-                    null,
-                        addToBackStack = false
+                removeSelfAndReplaceWithNextFragment(
+                    containerID = this@SignUpFragment.id,
+                    fragmentManager = supportFragmentManager,
+                    fragmentToBeAdded = LoginFragment.newInstance(),
+                    fragmentToBeRemoved = this@SignUpFragment,
+                    arguments = null,
+                    addToBackStack = false
                 )
             }
         })
