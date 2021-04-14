@@ -10,7 +10,6 @@
     <attr name="buttonTitleTextSize" format="dimension" />
     <attr name="buttonSubtitleTextSize" format="dimension" />
     <attr name="icon" format="reference" />
-    <attr name="iconTintColor" format="color" />
     <attr name="inputTextColor" format="color" />
     <attr name="defaultTextColor" format="color" />
 

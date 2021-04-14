@@ -1,7 +1,6 @@
 package com.example.mobile.design.lib
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.AttributeSet
@@ -14,23 +13,15 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.res.use
 
 class CustomizableGenericButton @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyle: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyle: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle) {
 
     private var customizedIv: ImageView? = null
     private var titleTv: TextView? = null
     private var subtitleTv: TextView? = null
     private var container: LinearLayout? = null
-
-    var iconDrawable: Drawable?
-        get() = customizedIv?.drawable
-        set(drawable) {
-            drawable?.let {
-                customizedIv?.background = it
-            }
-        }
 
     var titleText: String?
         get() = titleTv?.text?.toString()
@@ -83,6 +74,9 @@ class CustomizableGenericButton @JvmOverloads constructor(
         }
     }
 
+    /**
+     * initiate all the attributes here and set on respective view
+     */
     private fun initAttrs(attrs: AttributeSet, defStyle: Int) {
         context.theme.obtainStyledAttributes(attrs, R.styleable.CustomizedButton, defStyle, 0).use {
 
@@ -90,10 +84,10 @@ class CustomizableGenericButton @JvmOverloads constructor(
             subtitleText = it.getString(R.styleable.CustomizedButton_buttonSubtitleText)
 
             customizedIv?.apply {
-                iconDrawable = ResourcesCompat.getDrawable(
-                        resources,
-                        it.getResourceId(R.styleable.CustomizedButton_icon, R.drawable.round_corner),
-                        context.theme
+                background = ResourcesCompat.getDrawable(
+                    resources,
+                    it.getResourceId(R.styleable.CustomizedButton_icon, R.drawable.ic_user),
+                    context.theme
                 )
 
                 iconVisibility = it.getBoolean(R.styleable.CustomizedButton_iconVisible, false)
@@ -102,21 +96,22 @@ class CustomizableGenericButton @JvmOverloads constructor(
 
             titleTv?.apply {
                 setTextColor(
-                        it.getColor(
-                                R.styleable.CustomizedButton_buttonTitleTextColor,
-                                context.getColorFromAttr(R.attr.defaultTextColor)
-                        )
+                    it.getColor(
+                        R.styleable.CustomizedButton_buttonTitleTextColor,
+                        context.getColorFromAttr(R.attr.defaultTextColor)
+                    )
                 )
             }
 
             subtitleTv?.apply {
                 setTextColor(
-                        it.getColor(
-                                R.styleable.CustomizedButton_buttonSubtitleTextColor,
-                                context.getColorFromAttr(R.attr.defaultTextColor)
-                        )
+                    it.getColor(
+                        R.styleable.CustomizedButton_buttonSubtitleTextColor,
+                        context.getColorFromAttr(R.attr.defaultTextColor)
+                    )
                 )
-                subtitleTvVisibility = it.getBoolean(R.styleable.CustomizedButton_subtitleVisible, false)
+                subtitleTvVisibility =
+                    it.getBoolean(R.styleable.CustomizedButton_subtitleVisible, false)
             }
 
             buttonState = it.getInteger(R.styleable.CustomizedButton_buttonState, 0)
@@ -124,22 +119,37 @@ class CustomizableGenericButton @JvmOverloads constructor(
         }
     }
 
+    /**
+     * set button image based on state
+     * @param - [value] - use it for different state drawable
+     */
     private fun setBackgroundImage(value: Int) {
         container?.apply {
             background = when (value) {
                 BUTTON_STATE_NONE -> {
-                    ResourcesCompat.getDrawable(context.resources, R.drawable.round_corner, context.resources.newTheme())
+                    ResourcesCompat.getDrawable(
+                        context.resources,
+                        R.drawable.round_corner,
+                        context.resources.newTheme()
+                    )
                 }
                 BUTTON_STATE_DISABLED -> {
-                    ResourcesCompat.getDrawable(context.resources, R.drawable.button_faded, context.resources.newTheme())
+                    ResourcesCompat.getDrawable(
+                        context.resources,
+                        R.drawable.button_faded,
+                        context.resources.newTheme()
+                    )
                 }
                 else -> {
-                    ResourcesCompat.getDrawable(context.resources, R.drawable.button_selector, context.resources.newTheme())
+                    ResourcesCompat.getDrawable(
+                        context.resources,
+                        R.drawable.button_selector,
+                        context.resources.newTheme()
+                    )
                 }
             }
         }
     }
-
 
     /**
      * Update the view rendered. Use this in case of button is getting distorted
