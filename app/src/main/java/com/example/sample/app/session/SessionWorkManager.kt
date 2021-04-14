@@ -1,6 +1,7 @@
 package com.example.sample.app.session
 
 import android.content.Context
+import androidx.work.Data
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 
@@ -11,10 +12,21 @@ class SessionWorkManager(context: Context, workerParams: WorkerParameters) : Wor
 
         while (timeLeftInSession > 0 && !isStopped) {
             sleep()
-
             timeLeftInSession -= SESSION_TIME_OUT_CHECK_DELAY
         }
-        return Result.success()
+
+        return if (timeLeftInSession <= 0) {
+            val outputData = Data.Builder()
+                .putInt(SESSION_TIMEOUT_RESULT_KEY, SessionTimeOut.TIMED_OUT.ordinal)
+                .build()
+            Result.success(outputData)
+        } else {
+            val status = if (isStopped) SessionTimeOut.CANCELLED.ordinal else SessionTimeOut.FAILED.ordinal
+            val outputData = Data.Builder()
+                .putInt(SESSION_TIMEOUT_RESULT_KEY, status)
+                .build()
+            Result.failure(outputData)
+        }
     }
 
     /**
@@ -31,5 +43,9 @@ class SessionWorkManager(context: Context, workerParams: WorkerParameters) : Wor
     companion object {
         const val SESSION_TIME_OUT = 30 * 1000L
         const val SESSION_TIME_OUT_CHECK_DELAY = 1000L
+        const val SESSION_TIMEOUT_TAG = "session_timeout_tag"
+        const val SESSION_TIMEOUT_RESULT_KEY = "session_timeout_result_key"
+        const val ID_SESSION_TIMEOUT_WORK = "id_session_timeout_work"
+        const val DEFAULT_INTERACTION_COUNTER = 0L
     }
 }
