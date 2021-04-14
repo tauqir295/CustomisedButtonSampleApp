@@ -62,7 +62,7 @@ class CustomizableGenericButton @JvmOverloads constructor(
             field = isVisible
         }
 
-    var buttonState = 0
+    var buttonState = BUTTON_STATE_NONE
         set(value) {
             setBackgroundImage(value)
             field = value
@@ -117,7 +117,7 @@ class CustomizableGenericButton @JvmOverloads constructor(
                 subtitleTvVisibility = it.getBoolean(R.styleable.CustomizedButton_subtitleVisible, false)
             }
 
-            setBackgroundImage(it.getInteger(R.styleable.CustomizedButton_buttonState, 0))
+            buttonState = it.getInteger(R.styleable.CustomizedButton_buttonState, 0)
 
         }
     }
@@ -125,10 +125,10 @@ class CustomizableGenericButton @JvmOverloads constructor(
     private fun setBackgroundImage(value: Int) {
         container?.apply {
             background = when (value) {
-                0 -> {
+                BUTTON_STATE_NONE -> {
                     ResourcesCompat.getDrawable(context.resources, R.drawable.round_corner, context.resources.newTheme())
                 }
-                1 -> {
+                BUTTON_STATE_DISABLED -> {
                     ResourcesCompat.getDrawable(context.resources, R.drawable.button_faded, context.resources.newTheme())
                 }
                 else -> {
@@ -145,5 +145,11 @@ class CustomizableGenericButton @JvmOverloads constructor(
     fun refreshView() {
         invalidate()
         requestLayout()
+    }
+
+    companion object {
+        const val BUTTON_STATE_NONE = 0
+        const val BUTTON_STATE_DISABLED = 1
+        const val BUTTON_STATE_ENABLED = 2
     }
 }

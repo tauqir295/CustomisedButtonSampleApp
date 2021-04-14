@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.sample.app.database.AppDatabase
 import com.example.sample.app.database.UserDao
-import com.example.sample.app.login.signup.SignUpRepository
+import com.example.sample.app.database.DatabaseRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,20 +17,21 @@ import javax.inject.Singleton
 object SampleAppModule {
 
     @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
+        return Room.databaseBuilder(
+                appContext,
+                AppDatabase::class.java,
+                "customised-button-sample-app-db"
+        ).build()
+    }
+
+    @Provides
     fun provideUserDao(appDatabase: AppDatabase): UserDao {
         return appDatabase.userDao()
     }
 
     @Provides
-    fun provideMainRepo(userDao: UserDao): SignUpRepository = SignUpRepository(userDao)
+    fun provideMainRepo(userDao: UserDao): DatabaseRepository = DatabaseRepository(userDao)
 
-    @Provides
-    @Singleton
-    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
-        return Room.databaseBuilder(
-            appContext,
-            AppDatabase::class.java,
-            "customised-button-sample-app-db"
-        ).build()
-    }
 }

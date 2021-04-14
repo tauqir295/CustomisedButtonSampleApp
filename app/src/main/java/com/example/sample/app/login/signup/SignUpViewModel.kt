@@ -4,15 +4,22 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.mobile.design.lib.CustomizableGenericButton
+import com.example.mobile.design.lib.CustomizableGenericButton.Companion.BUTTON_STATE_DISABLED
+import com.example.mobile.design.lib.CustomizableGenericButton.Companion.BUTTON_STATE_ENABLED
+import com.example.sample.app.database.DatabaseRepository
+import com.example.sample.app.database.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
  * View model class used for updating the UI
  */
 @HiltViewModel
-class SignUpViewModel @Inject constructor(private val repository: SignUpRepository) : ViewModel() {
+class SignUpViewModel @Inject constructor(private val repository: DatabaseRepository) : ViewModel() {
     var fullName: String? = null
     var userName: String? = null
     var password: String? = null
@@ -23,34 +30,28 @@ class SignUpViewModel @Inject constructor(private val repository: SignUpReposito
 
     fun registerUser(view: View) {
 
-        if ((view as CustomizableGenericButton).buttonState == 1) {
-            println("isClickable")
-        }
-        _data.postValue("")
-/*        if (view.isAccessibilityFocused) {
-            GlobalScope.launch {
+        if ((view as CustomizableGenericButton).buttonState == 2) {
+            viewModelScope.launch {
                 fullName?.let { fullName ->
                     userName?.let { userName ->
                         password?.let { password
-                            val encryptedPassword = SecureDataUsingEncryption().encrypt(it)
-                            val user = User(fullName = fullName, userName = userName, password = encryptedPassword )
-                            repository.getUsers()
+                            val user = User(fullName = fullName, userName = userName, password = password )
+                            repository.insert(user = user)
                         }
 
                     }
                 }
             }
-        } else {
-            view.isPressed = true
-        }*/
+            _data.postValue("")
+        }
     }
 
     fun onTextChanged(fullName: String?, userName: String?, password: String?, view: View) {
         (view as CustomizableGenericButton).apply {
             buttonState = if ((fullName?.isNotEmpty() == true && userName?.isNotEmpty() == true && password?.isNotEmpty() == true)) {
-                2
+                BUTTON_STATE_ENABLED
             } else {
-                1
+                BUTTON_STATE_DISABLED
             }
         }
     }

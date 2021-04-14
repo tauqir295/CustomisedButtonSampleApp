@@ -15,7 +15,7 @@ interface UserDao {
         "SELECT * FROM user WHERE user_name LIKE :userName AND " +
                 "password LIKE :password LIMIT 1"
     )
-    fun findByName(userName: String, password: String): User
+    suspend fun findByName(userName: String, password: String): User?
 
     @Insert
     fun insertAll(vararg users: User)
@@ -24,5 +24,5 @@ interface UserDao {
     fun delete(user: User)
 
     @Insert
-    fun insert(user: User)
+    suspend fun insert(user: User)
 }

@@ -11,12 +11,14 @@ import androidx.fragment.app.viewModels
 import com.example.sample.app.home.MainActivity
 import com.example.sample.app.R
 import com.example.sample.app.databinding.FragmentLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * A simple [Fragment] subclass.
  * Use the [LoginFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding

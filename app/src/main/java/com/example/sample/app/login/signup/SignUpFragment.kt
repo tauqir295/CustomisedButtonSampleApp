@@ -66,7 +66,8 @@ class SignUpFragment : Fragment() {
                     this@SignUpFragment.id,
                     supportFragmentManager,
                     LoginFragment.newInstance(),
-                    null
+                    null,
+                        addToBackStack = false
                 )
             }
         })
