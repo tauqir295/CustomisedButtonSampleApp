@@ -2,6 +2,8 @@ package com.example.mobile.design.lib
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
@@ -145,6 +147,36 @@ class CustomizableGenericButton @JvmOverloads constructor(
     fun refreshView() {
         invalidate()
         requestLayout()
+    }
+
+    /**
+     * saving button state
+     */
+    override fun onSaveInstanceState(): Parcelable? {
+        return Bundle().apply {
+            putString("titleText", titleText)
+            putString("subtitleText", subtitleText)
+            putInt("buttonState", buttonState)
+            putBoolean("iconVisibility", iconVisibility)
+            putBoolean("subtitleTvVisibility", subtitleTvVisibility)
+            putParcelable("superState", super.onSaveInstanceState())
+        }
+    }
+
+    /**
+     * restoring button state
+     */
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state is Bundle) {
+            state.run {
+                titleText = getString("titleText", "")
+                subtitleText = getString("subtitleText", "")
+                buttonState = getInt("buttonState", 0)
+                iconVisibility = getBoolean("iconVisibility", false)
+                subtitleTvVisibility = getBoolean("subtitleTvVisibility", false)
+                super.onRestoreInstanceState(getParcelable("superState"))
+            }
+        }
     }
 
     companion object {
