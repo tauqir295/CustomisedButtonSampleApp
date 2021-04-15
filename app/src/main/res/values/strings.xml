@@ -13,5 +13,6 @@
     <string name="login_failed">"Login failed"</string>
     <string name="sigup">Sign Up</string>
     <string name="please_wait">Please wait ...</string>
+    <string name="session_expired">Your session has expired.</string>
 
 </resources>

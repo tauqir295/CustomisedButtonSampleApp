@@ -13,14 +13,27 @@ class SessionWorkManager(context: Context, workerParams: WorkerParameters) : Wor
         while (timeLeftInSession > 0 && !isStopped) {
             sleep()
             timeLeftInSession -= SESSION_TIME_OUT_CHECK_DELAY
+
+            // reset the session timeout in case user is interacting with the app.
+            if (SessionUtils.interactionCounter > 0) {
+
+                // call the api which will be used for keeping server session alive
+                // use below result to do so
+                val outputData = Data.Builder()
+                        .putInt(SESSION_TIMEOUT_RESULT_KEY, SessionTimeOut.REFRESH_REQUIRED.ordinal)
+                        .build()
+                return Result.success(outputData)
+            }
         }
 
+        // take the action based on session time out. Use the result data accordingly
         return if (timeLeftInSession <= 0) {
             val outputData = Data.Builder()
                 .putInt(SESSION_TIMEOUT_RESULT_KEY, SessionTimeOut.TIMED_OUT.ordinal)
                 .build()
             Result.success(outputData)
         } else {
+            // take the action based cancelled or failure
             val status = if (isStopped) SessionTimeOut.CANCELLED.ordinal else SessionTimeOut.FAILED.ordinal
             val outputData = Data.Builder()
                 .putInt(SESSION_TIMEOUT_RESULT_KEY, status)

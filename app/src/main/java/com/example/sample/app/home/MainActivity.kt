@@ -11,7 +11,7 @@ class MainActivity : BaseActivity() {
 
         findViewById<CustomizableGenericButton>(R.id.logoutBtn).run {
             setOnClickListener {
-                logout()
+                logout(false)
             }
         }
     }

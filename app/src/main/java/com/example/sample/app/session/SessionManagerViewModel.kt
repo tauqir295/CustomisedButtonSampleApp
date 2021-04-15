@@ -28,6 +28,8 @@ class SessionManagerViewModel @Inject constructor(): ViewModel() {
         workManager.cancelUniqueWork(ID_SESSION_TIMEOUT_WORK)
     }
 
+    // this transformation ensures whenever current work id changes work info,
+    // the UI will be observing the changes
     fun getOutputWorkInfo(): LiveData<List<WorkInfo>> {
         return workManager.getWorkInfosByTagLiveData(SESSION_TIMEOUT_TAG)
     }
