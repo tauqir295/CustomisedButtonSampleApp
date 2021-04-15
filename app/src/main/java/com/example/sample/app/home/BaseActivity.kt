@@ -6,12 +6,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sample.app.R
+import com.example.sample.app.login.ui.LoginActivity
 import com.example.sample.app.session.SessionManagerViewModel
 import com.example.sample.app.session.SessionTimeOut
 import com.example.sample.app.session.SessionUtils
 import com.example.sample.app.session.SessionWorkManager.Companion.DEFAULT_INTERACTION_COUNTER
 import com.example.sample.app.session.SessionWorkManager.Companion.SESSION_TIMEOUT_RESULT_KEY
-import com.example.sample.app.splash.SplashActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,7 +53,7 @@ open class BaseActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.session_expired), Toast.LENGTH_SHORT).show()
         }
         viewModel.cancelSessionTracking()
-        startActivity(Intent(this, SplashActivity::class.java))
+        startActivity(Intent(this, LoginActivity::class.java))
         this.finish()
     }
 
@@ -64,6 +64,8 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
+        // this is used for session timeout check after app comes to foreground
         viewModel.apply {
             if (timeAppWasInBackground != DEFAULT_INTERACTION_COUNTER && System.currentTimeMillis() - timeAppWasInBackground > 10) {
                 logout(true)
@@ -75,6 +77,7 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+        // this is used for session timeout calculation when app goes in background
         viewModel.run {
             if (timeAppWasInBackground == DEFAULT_INTERACTION_COUNTER) {
                 timeAppWasInBackground = System.currentTimeMillis()

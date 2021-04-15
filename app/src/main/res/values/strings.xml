@@ -13,4 +13,9 @@
     <string name="please_wait">Please wait …</string>
     <string name="session_expired">Your session has expired.</string>
 
+    <string name="failure_occurred">Failure occurred</string>
+    <string name="something_went_wrong">User name or password is incorrect. Try again.</string>
+    <string name="ok">OK</string>
+    <string name="no_data_found">No data found</string>
+
 </resources>

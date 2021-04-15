@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.sample.app.home.MainActivity
 import com.example.sample.app.R
 import com.example.sample.app.databinding.FragmentLoginBinding
+import com.example.sample.app.home.MainActivity
+import com.example.sample.app.utils.LOGGED_IN_USER
+import com.example.sample.app.utils.Status
+import com.example.sample.app.utils.showGenericErrorMessage
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -60,10 +63,20 @@ class LoginFragment : Fragment() {
      * check value change on viewModel live data
      */
     private fun setUpObserver() {
-        loginViewModel.data.observe(viewLifecycleOwner, {
-            (requireActivity() as LoginActivity).run {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+        loginViewModel.userData.observe(viewLifecycleOwner, {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    (requireActivity() as LoginActivity).run {
+                        startActivity(Intent(this, MainActivity::class.java).apply {
+                            putExtra(LOGGED_IN_USER, it.data)
+                        })
+                        finish()
+                    }
+                }
+
+                Status.ERROR -> {
+                    showGenericErrorMessage(requireActivity() as AppCompatActivity)
+                }
             }
         })
     }

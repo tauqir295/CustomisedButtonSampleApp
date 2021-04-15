@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="fullName"
+            type="String" />
 
     </data>
 
@@ -19,6 +22,16 @@
             android:orientation="vertical"
             tools:context=".home.MainActivity">
 
+            <TextView
+                android:id="@+id/userTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{`Welcome ` + fullName}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSize_16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
             <com.example.mobile.design.lib.CustomizableGenericButton
                 android:id="@+id/button1"
                 android:layout_width="wrap_content"
@@ -27,8 +40,9 @@
                 app:buttonTitleText="ButtonTitle"
                 app:icon="@drawable/ic_settings"
                 app:iconVisible="true"
+                android:layout_marginTop="@dimen/dimen_16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userTv"
                 app:subtitleVisible="true" />
 
             <com.example.mobile.design.lib.CustomizableGenericButton

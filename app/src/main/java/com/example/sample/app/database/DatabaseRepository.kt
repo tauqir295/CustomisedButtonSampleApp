@@ -15,7 +15,7 @@ class DatabaseRepository @Inject constructor(private val userDao: UserDao) {
     }
 
     @WorkerThread
-    suspend fun getUser(userName: String, password: String): User? {
-        return userDao.findByName(userName, password)
+    suspend fun getUser(userName: String, password: String): String? {
+        return userDao.findByUserNameAndPassword(userName, password)
     }
 }

@@ -1,5 +1,6 @@
 package com.example.sample.app.login.signup
 
+import android.content.SharedPreferences
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +11,7 @@ import com.example.mobile.design.lib.CustomizableGenericButton.Companion.BUTTON_
 import com.example.mobile.design.lib.CustomizableGenericButton.Companion.BUTTON_STATE_ENABLED
 import com.example.sample.app.database.DatabaseRepository
 import com.example.sample.app.database.model.User
+import com.example.sample.app.utils.HAS_USER_SIGNED_UP
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,7 +20,10 @@ import javax.inject.Inject
  * View model class used for updating the UI
  */
 @HiltViewModel
-class SignUpViewModel @Inject constructor(private val repository: DatabaseRepository) : ViewModel() {
+class SignUpViewModel @Inject constructor(
+    private val repository: DatabaseRepository,
+    private val sharedPreferences: SharedPreferences
+    ) : ViewModel() {
     var fullName: String? = null
     var userName: String? = null
     var password: String? = null
@@ -36,13 +41,18 @@ class SignUpViewModel @Inject constructor(private val repository: DatabaseReposi
                         password?.let { password
                             val user = User(fullName = fullName, userName = userName, password = password )
                             repository.insert(user = user)
+
+                            _data.postValue("")
+
+                            sharedPreferences.edit().apply {
+                                putBoolean(HAS_USER_SIGNED_UP, true)
+                            }.apply()
                         }
 
                     }
                 }
             }
         }
-        _data.postValue("")
     }
 
     fun onTextChanged(fullName: String?, userName: String?, password: String?, view: View) {

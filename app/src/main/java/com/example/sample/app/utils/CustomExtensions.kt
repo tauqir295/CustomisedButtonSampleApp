@@ -1,8 +1,11 @@
 package com.example.sample.app.utils
 
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.example.sample.app.R
 
 /**
  * using extension function to extend a class with new functionality.
@@ -32,5 +35,21 @@ fun removeSelfAndReplaceWithNextFragment(
             remove(fragmentToBeRemoved)
             commit()
         }
+    }
+}
+
+/**
+ * handling failed case by showing alert dialog
+ */
+fun showGenericErrorMessage(activity: AppCompatActivity?) {
+    activity?.run {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.failure_occurred))
+            .setMessage(getString(R.string.something_went_wrong))
+            .setPositiveButton(getString(R.string.ok)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setCancelable(false)
+            .show()
     }
 }
