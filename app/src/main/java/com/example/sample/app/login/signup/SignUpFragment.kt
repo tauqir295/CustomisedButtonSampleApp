@@ -82,7 +82,7 @@ class SignUpFragment : Fragment() {
         password?.let {
             if (password.isValidPassword()) {
 
-                binding.password.error = null
+                binding.passwordTil.error = null
                 binding.signUpButton.apply {
                     buttonState =
                         if ((fullName?.isNotEmpty() == true && userName?.isNotEmpty() == true)) {
@@ -92,7 +92,7 @@ class SignUpFragment : Fragment() {
                         }
                 }
             } else {
-                binding.password.error = getString(R.string.invalid_password)
+                binding.passwordTil.error = getString(R.string.invalid_password)
             }
         }
     }

@@ -24,7 +24,7 @@
             android:layout_margin="@dimen/dimen_16dp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fullName"
+                android:id="@+id/fullNameTil"
                 style="@style/EditTextOutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,14 +44,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/userName"
+                android:id="@+id/userNameTil"
                 style="@style/EditTextOutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fullName">
+                app:layout_constraintTop_toBottomOf="@+id/fullNameTil">
 
                 <EditText
                     android:id="@+id/inputUserName"
@@ -65,7 +65,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/password"
+                android:id="@+id/passwordTil"
                 style="@style/EditTextOutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                 app:endIconMode="password_toggle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userName">
+                app:layout_constraintTop_toBottomOf="@+id/userNameTil">
 
                 <EditText
                     android:id="@+id/inputPassword"
@@ -101,7 +101,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/password"
+                app:layout_constraintTop_toBottomOf="@+id/passwordTil"
                 app:layout_constraintVertical_bias="0.3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

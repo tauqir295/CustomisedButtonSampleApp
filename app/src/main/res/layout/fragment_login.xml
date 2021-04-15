@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="com.example.sample.app.login.ui.LoginViewModel" />
+
+        <variable
+            name="fragment"
+            type="com.example.sample.app.login.ui.LoginFragment" />
     </data>
 
     <ScrollView
@@ -18,41 +22,48 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/dimen_16dp">
 
-            <EditText
-                android:id="@+id/usernameEt"
-                android:layout_width="0dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/userNameTil"
+                style="@style/EditTextOutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16dp"
-                android:autofillHints="@null"
-                android:background="@drawable/round_corner"
-                android:hint="@string/prompt_username"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:inputType="text"
-                android:onTextChanged="@{(text, start, before, count) -> viewModel.onTextChanged(text.toString(), viewModel.password, loginButton)}"
-                android:padding="@dimen/dimen_16dp"
-                android:text="@={viewModel.userName}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/passwordEt"
-                android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/inputUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@null"
+                    android:hint="@string/prompt_username"
+                    android:inputType="textEmailAddress"
+                    android:onTextChanged="@{(text, start, before, count) -> fragment.onTextChanged(text.toString(), viewModel.password)}"
+                    android:text="@={viewModel.userName}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordTil"
+                style="@style/EditTextOutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16dp"
-                android:autofillHints="@null"
-                android:background="@drawable/round_corner"
-                android:hint="@string/prompt_password"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:onTextChanged="@{(text, start, before, count) -> viewModel.onTextChanged(viewModel.userName, text.toString(), loginButton)}"
-                android:padding="@dimen/dimen_16dp"
-                android:selectAllOnFocus="true"
-                android:text="@={viewModel.password}"
+                app:endIconMode="password_toggle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/usernameEt" />
+                app:layout_constraintTop_toBottomOf="@+id/userNameTil">
+
+                <EditText
+                    android:id="@+id/inputPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@null"
+                    android:hint="@string/prompt_password"
+                    android:inputType="textPassword"
+                    android:onTextChanged="@{(text, start, before, count) -> fragment.onTextChanged(viewModel.userName, text.toString())}"
+                    android:text="@={viewModel.password}" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.example.mobile.design.lib.CustomizableGenericButton
                 android:id="@+id/loginButton"
@@ -66,7 +77,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passwordEt"
+                app:layout_constraintTop_toBottomOf="@+id/passwordTil"
                 app:layout_constraintVertical_bias="0.1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

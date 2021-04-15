@@ -44,14 +44,4 @@ class LoginViewModel @Inject constructor(private val repository: DatabaseReposit
             }
         }
     }
-
-    fun onTextChanged(userName: String?, password: String?, view: View) {
-        (view as CustomizableGenericButton).apply {
-            buttonState = if ((userName?.isNotEmpty() == true && password?.isNotEmpty() == true)) {
-                CustomizableGenericButton.BUTTON_STATE_ENABLED
-            } else {
-                CustomizableGenericButton.BUTTON_STATE_DISABLED
-            }
-        }
-    }
 }

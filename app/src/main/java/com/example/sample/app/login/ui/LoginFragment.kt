@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.mobile.design.lib.CustomizableGenericButton
 import com.example.sample.app.R
 import com.example.sample.app.databinding.FragmentLoginBinding
 import com.example.sample.app.home.MainActivity
 import com.example.sample.app.utils.LOGGED_IN_USER
 import com.example.sample.app.utils.Status
+import com.example.sample.app.utils.isValidPassword
 import com.example.sample.app.utils.showGenericErrorMessage
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,6 +39,7 @@ class LoginFragment : Fragment() {
 
         // data binding is used
         binding.apply {
+            binding.fragment = this@LoginFragment
             binding.viewModel = loginViewModel
 
             // Specify the current fragment as the lifecycle owner of the binding.
@@ -79,6 +82,16 @@ class LoginFragment : Fragment() {
                 }
             }
         })
+    }
+
+    fun onTextChanged(userName: String?, password: String?) {
+        binding.loginButton.apply {
+            buttonState = if ((userName?.isNotEmpty() == true && password?.isNotEmpty() == true)) {
+                CustomizableGenericButton.BUTTON_STATE_ENABLED
+            } else {
+                CustomizableGenericButton.BUTTON_STATE_DISABLED
+            }
+        }
     }
 
     companion object {
