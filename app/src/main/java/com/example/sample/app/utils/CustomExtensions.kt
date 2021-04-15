@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.sample.app.R
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 /**
  * using extension function to extend a class with new functionality.
@@ -52,4 +54,19 @@ fun showGenericErrorMessage(activity: AppCompatActivity?) {
             .setCancelable(false)
             .show()
     }
+}
+
+/**
+ * Password must contain minimum 8 characters at least
+ * 1 lower case letter
+ * 1 upper case letter,
+ * 1 Number, and
+ * 1 Special Character
+ */
+fun String?.isValidPassword(): Boolean {
+    this?.let {
+        val pattern: Pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\S+\$).{8,}\$")
+        val matcher: Matcher = pattern.matcher(this)
+        return matcher.matches()
+    } ?: return false
 }
