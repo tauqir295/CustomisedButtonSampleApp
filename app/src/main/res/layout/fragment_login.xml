@@ -31,7 +31,6 @@
                 android:onTextChanged="@{(text, start, before, count) -> viewModel.onTextChanged(text.toString(), viewModel.password, loginButton)}"
                 android:padding="@dimen/dimen_16dp"
                 android:text="@={viewModel.userName}"
-                android:textColorHint="?attr/inputTextColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +50,6 @@
                 android:padding="@dimen/dimen_16dp"
                 android:selectAllOnFocus="true"
                 android:text="@={viewModel.password}"
-                android:textColorHint="?attr/inputTextColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/usernameEt" />

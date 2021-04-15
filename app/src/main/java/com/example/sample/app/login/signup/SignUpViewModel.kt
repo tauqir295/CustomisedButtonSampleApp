@@ -7,8 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mobile.design.lib.CustomizableGenericButton
-import com.example.mobile.design.lib.CustomizableGenericButton.Companion.BUTTON_STATE_DISABLED
-import com.example.mobile.design.lib.CustomizableGenericButton.Companion.BUTTON_STATE_ENABLED
 import com.example.sample.app.database.DatabaseRepository
 import com.example.sample.app.database.model.User
 import com.example.sample.app.utils.HAS_USER_SIGNED_UP
@@ -55,13 +53,4 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
-    fun onTextChanged(fullName: String?, userName: String?, password: String?, view: View) {
-        (view as CustomizableGenericButton).apply {
-            buttonState = if ((fullName?.isNotEmpty() == true && userName?.isNotEmpty() == true && password?.isNotEmpty() == true)) {
-                BUTTON_STATE_ENABLED
-            } else {
-                BUTTON_STATE_DISABLED
-            }
-        }
-    }
 }

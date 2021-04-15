@@ -1,0 +1,10 @@
+<resources>
+
+    <!--    Overriding material design behavior-->
+    <style name="EditTextOutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeWidth">@dimen/dimen_2dp</item>
+        <item name="boxStrokeWidthFocused">@dimen/dimen_2dp</item>
+        <item name="boxStrokeColor">@color/mdl_input_text_selector</item>
+    </style>
+
+</resources>

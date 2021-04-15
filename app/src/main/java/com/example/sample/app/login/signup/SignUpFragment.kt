@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.mobile.design.lib.CustomizableGenericButton
 import com.example.sample.app.R
 import com.example.sample.app.databinding.FragmentSignupBinding
 import com.example.sample.app.login.ui.LoginFragment
+import com.example.sample.app.utils.isValidPassword
 import com.example.sample.app.utils.removeSelfAndReplaceWithNextFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,6 +37,7 @@ class SignUpFragment : Fragment() {
 
         // data binding is used
         binding.apply {
+            binding.fragment = this@SignUpFragment
             binding.viewModel = signUpViewModel
             // Specify the current fragment as the lifecycle owner of the binding.
             // This is necessary so that the binding can observe updates.
@@ -72,6 +75,26 @@ class SignUpFragment : Fragment() {
                 )
             }
         })
+    }
+
+    fun onTextChanged(fullName: String?, userName: String?, password: String?) {
+
+        password?.let {
+            if (password.isValidPassword()) {
+
+                binding.password.error = null
+                binding.signUpButton.apply {
+                    buttonState =
+                        if ((fullName?.isNotEmpty() == true && userName?.isNotEmpty() == true)) {
+                            CustomizableGenericButton.BUTTON_STATE_ENABLED
+                        } else {
+                            CustomizableGenericButton.BUTTON_STATE_DISABLED
+                        }
+                }
+            } else {
+                binding.password.error = getString(R.string.invalid_password)
+            }
+        }
     }
 
     companion object {
