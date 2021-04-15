@@ -79,7 +79,7 @@ class SignUpFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
 
-         * @return A new instance of fragment SignupFragment.
+         * @return A new instance of fragment SignUp Fragment.
          */
         @JvmStatic
         fun newInstance() = SignUpFragment()

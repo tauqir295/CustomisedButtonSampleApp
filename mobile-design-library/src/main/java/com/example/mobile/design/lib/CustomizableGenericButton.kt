@@ -162,7 +162,7 @@ class CustomizableGenericButton @JvmOverloads constructor(
     /**
      * saving button state
      */
-    override fun onSaveInstanceState(): Parcelable? {
+    override fun onSaveInstanceState(): Parcelable {
         return Bundle().apply {
             putString("titleText", titleText)
             putString("subtitleText", subtitleText)

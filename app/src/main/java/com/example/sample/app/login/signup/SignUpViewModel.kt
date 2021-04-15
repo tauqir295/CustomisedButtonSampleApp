@@ -11,7 +11,6 @@ import com.example.mobile.design.lib.CustomizableGenericButton.Companion.BUTTON_
 import com.example.sample.app.database.DatabaseRepository
 import com.example.sample.app.database.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

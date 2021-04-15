@@ -80,7 +80,5 @@ open class BaseActivity : AppCompatActivity() {
                 timeAppWasInBackground = System.currentTimeMillis()
             }
         }
-
-
     }
 }

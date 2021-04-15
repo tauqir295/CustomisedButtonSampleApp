@@ -1,7 +1,6 @@
 package com.example.sample.app.database
 
 import androidx.annotation.WorkerThread
-import com.example.sample.app.database.UserDao
 import com.example.sample.app.database.model.User
 import javax.inject.Inject
 
@@ -13,11 +12,6 @@ class DatabaseRepository @Inject constructor(private val userDao: UserDao) {
     @WorkerThread
     suspend fun insert(user: User) {
         userDao.insert(user)
-    }
-
-    @WorkerThread
-    fun getUsers(): List<User>{
-        return userDao.getAll()
     }
 
     @WorkerThread
