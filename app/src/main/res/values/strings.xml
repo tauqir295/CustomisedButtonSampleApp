@@ -23,5 +23,6 @@
     <string name="ok">OK</string>
     <string name="no_data_found">No data found</string>
     <string name="sign_up_invitation">Haven&#39;t signed up yet. Click here to sign up.</string>
+    <string name="logout">Logout</string>
 
 </resources>
