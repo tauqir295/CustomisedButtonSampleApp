@@ -12,6 +12,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.res.use
 
+/**
+ * Custom class for button
+ */
 class CustomizableGenericButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
