@@ -4,7 +4,7 @@ import com.example.sample.app.session.SessionWorkManager.Companion.DEFAULT_INTER
 
 internal object SessionUtils {
 
-    var interactionCounter = 0L
+    var interactionCounter = DEFAULT_INTERACTION_COUNTER
 
     fun resetInteractionCounter() {
         interactionCounter = DEFAULT_INTERACTION_COUNTER

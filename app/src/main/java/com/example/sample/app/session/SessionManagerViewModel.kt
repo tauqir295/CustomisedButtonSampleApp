@@ -6,6 +6,7 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
+import com.example.sample.app.session.SessionWorkManager.Companion.DEFAULT_INTERACTION_COUNTER
 import com.example.sample.app.session.SessionWorkManager.Companion.ID_SESSION_TIMEOUT_WORK
 import com.example.sample.app.session.SessionWorkManager.Companion.SESSION_TIMEOUT_TAG
 import javax.inject.Inject
@@ -14,7 +15,7 @@ class SessionManagerViewModel @Inject constructor(): ViewModel() {
 
     private val workManager = WorkManager.getInstance()
 
-    var timeAppWasInBackground = 0L
+    var timeAppWasInBackground = DEFAULT_INTERACTION_COUNTER
 
     fun startTrackingSession() {
         val save = OneTimeWorkRequest.Builder(SessionWorkManager::class.java)

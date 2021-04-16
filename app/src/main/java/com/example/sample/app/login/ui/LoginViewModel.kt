@@ -26,7 +26,7 @@ class LoginViewModel @Inject constructor(private val repository: DatabaseReposit
         get() = _userData
 
     fun loginUser(view: View) {
-
+        // click event only when button is enabled
         if ((view as CustomizableGenericButton).buttonState == 2) {
             viewModelScope.launch(Dispatchers.IO) {
                 userName?.let { userName ->

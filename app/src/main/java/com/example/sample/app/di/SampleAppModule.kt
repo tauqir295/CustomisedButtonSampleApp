@@ -52,6 +52,4 @@ object SampleAppModule {
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
     }
-
-
 }

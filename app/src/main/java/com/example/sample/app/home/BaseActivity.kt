@@ -12,6 +12,7 @@ import com.example.sample.app.session.SessionTimeOut
 import com.example.sample.app.session.SessionUtils
 import com.example.sample.app.session.SessionWorkManager.Companion.DEFAULT_INTERACTION_COUNTER
 import com.example.sample.app.session.SessionWorkManager.Companion.SESSION_TIMEOUT_RESULT_KEY
+import com.example.sample.app.session.SessionWorkManager.Companion.ZERO
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +32,7 @@ open class BaseActivity : AppCompatActivity() {
 
                 if (it.isNullOrEmpty()) return@observe
 
-                val sessionTimeState = SessionTimeOut.values()[it[0].outputData.getInt(SESSION_TIMEOUT_RESULT_KEY, 0)]
+                val sessionTimeState = SessionTimeOut.values()[it[0].outputData.getInt(SESSION_TIMEOUT_RESULT_KEY, ZERO)]
 
                 if (sessionTimeState == SessionTimeOut.REFRESH_REQUIRED) {
                     // reset the counter

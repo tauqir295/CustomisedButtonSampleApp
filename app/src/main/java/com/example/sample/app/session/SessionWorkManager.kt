@@ -10,12 +10,12 @@ class SessionWorkManager(context: Context, workerParams: WorkerParameters) : Wor
     override fun doWork(): Result {
         var timeLeftInSession = SESSION_TIME_OUT
 
-        while (timeLeftInSession > 0 && !isStopped) {
+        while (timeLeftInSession > ZERO && !isStopped) {
             sleep()
             timeLeftInSession -= SESSION_TIME_OUT_CHECK_DELAY
 
             // reset the session timeout in case user is interacting with the app.
-            if (SessionUtils.interactionCounter > 0) {
+            if (SessionUtils.interactionCounter > ZERO) {
 
                 // call the api which will be used for keeping server session alive
                 // use below result to do so
@@ -27,7 +27,7 @@ class SessionWorkManager(context: Context, workerParams: WorkerParameters) : Wor
         }
 
         // take the action based on session time out. Use the result data accordingly
-        return if (timeLeftInSession <= 0) {
+        return if (timeLeftInSession <= ZERO) {
             val outputData = Data.Builder()
                 .putInt(SESSION_TIMEOUT_RESULT_KEY, SessionTimeOut.TIMED_OUT.ordinal)
                 .build()
@@ -47,7 +47,7 @@ class SessionWorkManager(context: Context, workerParams: WorkerParameters) : Wor
      */
     private fun sleep() {
         try {
-            Thread.sleep(SESSION_TIME_OUT_CHECK_DELAY, 0)
+            Thread.sleep(SESSION_TIME_OUT_CHECK_DELAY, ZERO)
         } catch (e: InterruptedException) {
             println(e.printStackTrace())
         }
@@ -60,5 +60,6 @@ class SessionWorkManager(context: Context, workerParams: WorkerParameters) : Wor
         const val SESSION_TIMEOUT_RESULT_KEY = "session_timeout_result_key"
         const val ID_SESSION_TIMEOUT_WORK = "id_session_timeout_work"
         const val DEFAULT_INTERACTION_COUNTER = 0L
+        const val ZERO = 0
     }
 }

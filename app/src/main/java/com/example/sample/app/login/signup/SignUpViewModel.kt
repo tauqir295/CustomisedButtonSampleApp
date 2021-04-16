@@ -32,6 +32,7 @@ class SignUpViewModel @Inject constructor(
 
     fun registerUser(view: View) {
 
+        // click event only when button is enabled
         if ((view as CustomizableGenericButton).buttonState == 2) {
             viewModelScope.launch {
                 fullName?.let { fullName ->
@@ -46,11 +47,9 @@ class SignUpViewModel @Inject constructor(
                                 putBoolean(HAS_USER_SIGNED_UP, true)
                             }.apply()
                         }
-
                     }
                 }
             }
         }
     }
-
 }
