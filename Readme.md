@@ -21,3 +21,7 @@
 1. Bug fixes and ui changes can be scope for future changes.
 2. Release and proguard configuration.
 3. Remove redundant code if any.
+
+### Related documents
+1. [Sample app](app/Readme.md)
+2. [Mobile design library](mobile-design-library/Readme.md)
