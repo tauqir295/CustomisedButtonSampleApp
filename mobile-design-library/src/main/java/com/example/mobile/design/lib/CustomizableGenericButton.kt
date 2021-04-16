@@ -164,12 +164,12 @@ class CustomizableGenericButton @JvmOverloads constructor(
      */
     override fun onSaveInstanceState(): Parcelable {
         return Bundle().apply {
-            putString("titleText", titleText)
-            putString("subtitleText", subtitleText)
-            putInt("buttonState", buttonState)
-            putBoolean("iconVisibility", iconVisibility)
-            putBoolean("subtitleTvVisibility", subtitleTvVisibility)
-            putParcelable("superState", super.onSaveInstanceState())
+            putString(TITLE_TEXT, titleText)
+            putString(SUBTITLE_TEXT, subtitleText)
+            putInt(BUTTON_STATE, buttonState)
+            putBoolean(ICON_VISIBILITY, iconVisibility)
+            putBoolean(SUBTITLE_TV_VISIBILITY, subtitleTvVisibility)
+            putParcelable(SUPER_STATE, super.onSaveInstanceState())
         }
     }
 
@@ -179,12 +179,12 @@ class CustomizableGenericButton @JvmOverloads constructor(
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is Bundle) {
             state.run {
-                titleText = getString("titleText", "")
-                subtitleText = getString("subtitleText", "")
-                buttonState = getInt("buttonState", 0)
-                iconVisibility = getBoolean("iconVisibility", false)
-                subtitleTvVisibility = getBoolean("subtitleTvVisibility", false)
-                super.onRestoreInstanceState(getParcelable("superState"))
+                titleText = getString(TITLE_TEXT, "")
+                subtitleText = getString(SUBTITLE_TEXT, "")
+                buttonState = getInt(BUTTON_STATE, 0)
+                iconVisibility = getBoolean(ICON_VISIBILITY, false)
+                subtitleTvVisibility = getBoolean(SUBTITLE_TV_VISIBILITY, false)
+                super.onRestoreInstanceState(getParcelable(SUPER_STATE))
             }
         }
     }
@@ -193,5 +193,11 @@ class CustomizableGenericButton @JvmOverloads constructor(
         const val BUTTON_STATE_NONE = 0
         const val BUTTON_STATE_DISABLED = 1
         const val BUTTON_STATE_ENABLED = 2
+        const val TITLE_TEXT = "titleText"
+        const val SUBTITLE_TEXT = "subtitleText"
+        const val BUTTON_STATE = "buttonState"
+        const val ICON_VISIBILITY = "iconVisibility"
+        const val SUBTITLE_TV_VISIBILITY = "subtitleTvVisibility"
+        const val SUPER_STATE = "superState"
     }
 }
