@@ -23,5 +23,6 @@
     <string name="ok">OK</string>
     <string name="no_data_found">No data found</string>
     <string name="logout">Logout</string>
+    <string name="home_screen_title">Home Screen</string>
 
 </resources>

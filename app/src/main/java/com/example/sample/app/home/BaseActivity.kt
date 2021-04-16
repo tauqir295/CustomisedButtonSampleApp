@@ -25,6 +25,9 @@ open class BaseActivity : AppCompatActivity() {
         startTrackingSession()
     }
 
+    /**
+     * start tracking session time out
+     */
     private fun startTrackingSession() {
         viewModel.run {
             startTrackingSession()
@@ -49,6 +52,9 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * logout of the app
+     */
     fun logout(hasSessionExpired: Boolean) {
         if (hasSessionExpired) {
             Toast.makeText(this, getString(R.string.session_expired), Toast.LENGTH_SHORT).show()
@@ -60,6 +66,7 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onUserInteraction() {
         super.onUserInteraction()
+        // increase the session tracking counter
         SessionUtils.increaseInteractionCounter()
     }
 

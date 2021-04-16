@@ -7,6 +7,9 @@ import com.example.sample.app.R
 import com.example.sample.app.databinding.ActivityMainBinding
 import com.example.sample.app.utils.LOGGED_IN_USER
 
+/**
+ * Home screen
+ */
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,5 +26,7 @@ class MainActivity : BaseActivity() {
                 logout(false)
             }
         }
+
+        title = getString(R.string.home_screen_title)
     }
 }

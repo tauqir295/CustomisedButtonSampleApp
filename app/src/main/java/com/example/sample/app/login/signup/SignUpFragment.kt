@@ -20,7 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
  * Use the [SignUpFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
 

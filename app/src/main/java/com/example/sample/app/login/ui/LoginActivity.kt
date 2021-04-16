@@ -10,6 +10,9 @@ import com.example.sample.app.utils.HAS_USER_SIGNED_UP
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+/**
+ * Login activity manages sign up and login fragment
+ */
 @AndroidEntryPoint
 class LoginActivity: AppCompatActivity(R.layout.activity_login)  {
 
