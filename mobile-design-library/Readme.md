@@ -6,7 +6,8 @@ This library is used to manage all the custom views.
 This is a customised button that has configurable title, sub title, and icon 
 
 ### Integration
-``` xml
+``` 
+    xml
             
             <com.example.mobile.design.lib.CustomizableGenericButton
                 android:id="@+id/buttonOne"
@@ -46,14 +47,14 @@ This is a customised button that has configurable title, sub title, and icon
 ```
     code
         
-        findViewById<CustomizableGenericButton>(R.id.button4).apply {
+        findViewById<CustomizableGenericButton>(R.id.buttonId).apply {
             titleText = "Continue"
             subtitleText = "done via code"
             iconDrawable = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_settings)
             subtitleTvVisibility = true
         }
 
-        findViewById<CustomizableGenericButton>(R.id.button5).apply {
+        findViewById<CustomizableGenericButton>(R.id.buttonId).apply {
             titleText = "This is an example for long title"
             subtitleText = "This is an example sub title"
             iconDrawable = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_settings)
@@ -62,3 +63,9 @@ This is a customised button that has configurable title, sub title, and icon
         }
 
 ```
+### Theme
+This component responds to theme change. Change the attributes as coded in `Theme.MDL` and `Theme.Flavored`.
+Create own theme with similar attributes and see the effect.
+
+### Colors and dimensions
+It is generally recommended to use the colors and dimensions from design library
