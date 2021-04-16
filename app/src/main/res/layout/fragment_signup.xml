@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_40dp"
                 android:layout_marginBottom="@dimen/dimen_40dp"
-                android:onClick="@{() -> viewModel.registerUser(signUpButton)}"
+                android:onClick="@{() -> fragment.registerUser()}"
                 app:buttonState="disabled"
                 app:buttonTitleText="@string/sigup"
                 app:buttonTitleTextColor="@color/white"

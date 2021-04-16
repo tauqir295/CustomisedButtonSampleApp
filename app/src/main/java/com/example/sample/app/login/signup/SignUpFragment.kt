@@ -63,7 +63,7 @@ class SignUpFragment : Fragment() {
      * check value change on viewModel live data
      */
     private fun setUpObserver() {
-        signUpViewModel.data.observe(viewLifecycleOwner, {
+        signUpViewModel.signedUpData.observe(viewLifecycleOwner, {
             requireActivity().run {
                 removeSelfAndReplaceWithNextFragment(
                     containerID = this@SignUpFragment.id,
@@ -93,6 +93,21 @@ class SignUpFragment : Fragment() {
                 }
             } else {
                 binding.passwordTil.error = getString(R.string.invalid_password)
+            }
+        }
+    }
+
+    // click event only when button is enabled
+    fun registerUser() {
+        if (binding.signUpButton.buttonState == 2) {
+            signUpViewModel.run {
+                fullName?.let {
+                    userName?.let {
+                        password?.let {
+                            registerUser()
+                        }
+                    }
+                }
             }
         }
     }

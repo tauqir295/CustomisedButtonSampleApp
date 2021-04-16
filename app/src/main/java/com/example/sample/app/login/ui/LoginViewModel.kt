@@ -1,11 +1,9 @@
 package com.example.sample.app.login.ui
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobile.design.lib.CustomizableGenericButton
 import com.example.sample.app.database.DatabaseRepository
 import com.example.sample.app.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,20 +23,17 @@ class LoginViewModel @Inject constructor(private val repository: DatabaseReposit
     val userData: LiveData<Resource<String>>
         get() = _userData
 
-    fun loginUser(view: View) {
-        // click event only when button is enabled
-        if ((view as CustomizableGenericButton).buttonState == 2) {
-            viewModelScope.launch(Dispatchers.IO) {
-                userName?.let { userName ->
-                    password?.let { password ->
-                        try {
-                            repository.getUser(userName, password)?.let {
-                                _userData.postValue(Resource.success(it))
-                            } ?: _userData.postValue(Resource.error("Failure occurred", null))
+    fun loginUser() {
+        viewModelScope.launch(Dispatchers.IO) {
+            userName?.let { userName ->
+                password?.let { password ->
+                    try {
+                        repository.getUser(userName, password)?.let {
+                            _userData.postValue(Resource.success(it))
+                        } ?: _userData.postValue(Resource.error("Failure occurred", null))
 
-                        } catch (e: Exception) {
-                            _userData.postValue(Resource.error("Failure occurred", null))
-                        }
+                    } catch (e: Exception) {
+                        _userData.postValue(Resource.error("Failure occurred", null))
                     }
                 }
             }

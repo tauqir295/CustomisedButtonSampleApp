@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16dp"
                 android:layout_marginBottom="@dimen/dimen_16dp"
-                android:onClick="@{() -> viewModel.loginUser(loginButton)}"
+                android:onClick="@{() -> fragment.loginUser()}"
                 app:buttonState="disabled"
                 app:buttonTitleText="@string/title_login"
                 app:buttonTitleTextColor="@color/white"
