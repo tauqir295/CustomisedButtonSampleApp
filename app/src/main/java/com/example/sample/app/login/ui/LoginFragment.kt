@@ -73,7 +73,7 @@ class LoginFragment : Fragment() {
                         startActivity(Intent(this, MainActivity::class.java).apply {
                             putExtra(LOGGED_IN_USER, it.data)
                         })
-                        finish()
+                        this.finish()
                     }
                 }
 
