@@ -65,7 +65,7 @@ This is a customised button that has configurable title, sub title, and icon
 ```
 ### Theme
 This component responds to theme change. Change the attributes as coded in `Theme.MDL` and `Theme.Flavored`.
-Create own theme with similar attributes and see the effect.
+Create own theme with similar attributes and add it in [manifest](../app/src/main/AndroidManifest.xml) `android:theme="@style/ThemeName"` to see the effect.
 
 ### Colors and dimensions
 It is generally recommended to use the colors and dimensions from design library
