@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import androidx.work.WorkManager
 import com.example.sample.app.database.AppDatabase
 import com.example.sample.app.database.DatabaseRepository
 import com.example.sample.app.database.UserDao
@@ -54,4 +55,8 @@ object SampleAppModule {
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
     }
+
+    @Provides
+    fun provideWorkManager(@ApplicationContext appContext: Context): WorkManager = WorkManager.getInstance(appContext)
+
 }

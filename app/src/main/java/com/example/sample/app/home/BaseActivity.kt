@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 open class BaseActivity : AppCompatActivity() {
 
-    val viewModel: SessionManagerViewModel by viewModels()
+    private val viewModel: SessionManagerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

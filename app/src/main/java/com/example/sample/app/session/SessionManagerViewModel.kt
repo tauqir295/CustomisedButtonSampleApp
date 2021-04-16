@@ -9,14 +9,14 @@ import androidx.work.WorkManager
 import com.example.sample.app.session.SessionWorkManager.Companion.DEFAULT_INTERACTION_COUNTER
 import com.example.sample.app.session.SessionWorkManager.Companion.ID_SESSION_TIMEOUT_WORK
 import com.example.sample.app.session.SessionWorkManager.Companion.SESSION_TIMEOUT_TAG
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 /**
  * view model for session tracking
  */
-class SessionManagerViewModel @Inject constructor(): ViewModel() {
-
-    private val workManager = WorkManager.getInstance()
+@HiltViewModel
+class SessionManagerViewModel @Inject constructor(private val workManager: WorkManager): ViewModel() {
 
     var timeAppWasInBackground = DEFAULT_INTERACTION_COUNTER
 
