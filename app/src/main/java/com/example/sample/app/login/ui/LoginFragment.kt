@@ -8,15 +8,12 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewModelScope
 import com.example.mobile.design.lib.CustomizableGenericButton
 import com.example.sample.app.R
 import com.example.sample.app.databinding.FragmentLoginBinding
 import com.example.sample.app.home.MainActivity
 import com.example.sample.app.utils.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass.
@@ -66,22 +63,28 @@ class LoginFragment : Fragment() {
      * check value change on viewModel live data
      */
     private fun setUpObserver() {
-        loginViewModel.userData.observe(viewLifecycleOwner, {
-            when (it.status) {
-                Status.SUCCESS -> {
-                    (requireActivity() as LoginActivity).run {
-                        startActivity(Intent(this, MainActivity::class.java).apply {
-                            putExtra(LOGGED_IN_USER, it.data)
-                        })
-                        this.finish()
+        loginViewModel.run {
+            userData.observe(viewLifecycleOwner, {
+                if (hasDataBeenObservedOnce) {
+                    when (it.status) {
+                        Status.SUCCESS -> {
+                            (requireActivity() as LoginActivity).run {
+                                startActivity(Intent(this, MainActivity::class.java).apply {
+                                    putExtra(LOGGED_IN_USER, it.data)
+                                })
+                                this.finish()
+                            }
+                        }
+
+                        Status.ERROR -> {
+                            showGenericErrorMessage(requireActivity() as AppCompatActivity)
+                        }
                     }
+                    hasDataBeenObservedOnce = false
                 }
 
-                Status.ERROR -> {
-                    showGenericErrorMessage(requireActivity() as AppCompatActivity)
-                }
-            }
-        })
+            })
+        }
     }
 
     fun onTextChanged(userName: String?, password: String?) {
@@ -98,6 +101,7 @@ class LoginFragment : Fragment() {
         // click event only when button is enabled
         if (binding.loginButton.buttonState == 2) {
             loginViewModel.run {
+                hasDataBeenObservedOnce = true
                 loginUser()
             }
         }

@@ -18,7 +18,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(private val repository: DatabaseRepository) : ViewModel() {
     var userName: String? = null
     var password: String? = null
-
+    var hasDataBeenObservedOnce = false // use this variable to help in observing only once. Helpful in device orientation change.
     private val _userData = MutableLiveData<Resource<String>>()
     val userData: LiveData<Resource<String>>
         get() = _userData
@@ -31,7 +31,6 @@ class LoginViewModel @Inject constructor(private val repository: DatabaseReposit
                         repository.getUser(userName, password)?.let {
                             _userData.postValue(Resource.success(it))
                         } ?: _userData.postValue(Resource.error("Failure occurred", null))
-
                     } catch (e: Exception) {
                         _userData.postValue(Resource.error("Failure occurred", null))
                     }
