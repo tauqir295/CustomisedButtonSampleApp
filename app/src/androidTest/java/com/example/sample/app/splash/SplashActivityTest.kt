@@ -2,15 +2,18 @@ package com.example.sample.app.splash
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.test.InstrumentationRegistry
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
-import androidx.test.runner.AndroidJUnit4
+import com.example.sample.app.BaseApplication
 import com.example.sample.app.R
+import com.example.sample.app.utils.DB_NAME
+import com.example.sample.app.utils.SHARED_PREF_NAME
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
@@ -22,7 +25,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class SplashActivityTest {
@@ -32,8 +34,12 @@ class SplashActivityTest {
         @BeforeClass
         @JvmStatic
         fun setUp() {
-            val flag = InstrumentationRegistry.getTargetContext().deleteDatabase("customised-button-sample-app-db")
-            println("flag == $flag")
+            ApplicationProvider.getApplicationContext<BaseApplication>().run {
+
+                deleteDatabase(DB_NAME)
+
+                deleteSharedPreferences(SHARED_PREF_NAME)
+            }
         }
     }
 
@@ -41,15 +47,15 @@ class SplashActivityTest {
     @JvmField
     var mActivityTestRule = ActivityTestRule(SplashActivity::class.java)
 
-
     @Test
     fun endToEndTesting() {
         Thread.sleep(1500)
-        onView(withId(R.id.fullNameEt)).check(matches(isDisplayed()))
-        onView(withId(R.id.usernameEt)).check(matches(isDisplayed()))
-        onView(withId(R.id.passwordEt)).check(matches(isDisplayed()))
 
-        val linearLayout = onView(
+        onView(withId(R.id.fullNameTil)).check(matches(isDisplayed()))
+        onView(withId(R.id.userNameTil)).check(matches(isDisplayed()))
+        onView(withId(R.id.passwordTil)).check(matches(isDisplayed()))
+
+        onView(
             allOf(
                 withId(R.id.customGenericButtonContainer),
                 withParent(
@@ -60,66 +66,40 @@ class SplashActivityTest {
                 ),
                 isDisplayed()
             )
-        )
-        linearLayout.check(matches(isDisplayed()))
+        ).check(matches(isDisplayed()))
 
-        val linearLayout2 = onView(
+        onView(
             allOf(
-                withId(R.id.customGenericButtonContainer),
-                withParent(
-                    allOf(
-                        withId(R.id.signUpButton),
-                        withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))
-                    )
-                ),
+                withId(R.id.customizableButtonTitleTv), withText("Sign Up"),
+                withParent(withParent(withId(R.id.customGenericButtonContainer))),
                 isDisplayed()
             )
-        )
-        linearLayout2.check(matches(isDisplayed()))
+        ).check(matches(withText("Sign Up")))
 
-        val appCompatEditText = onView(
+        onView(withId(R.id.inputFullName))
+            .perform(scrollTo(), replaceText("Joe Dan"), closeSoftKeyboard())
+
+        onView(withId(R.id.inputUserName))
+            .perform(scrollTo(), replaceText("joe"), closeSoftKeyboard())
+
+        onView(withId(R.id.inputPassword))
+            .perform(scrollTo(), replaceText("Android@2021"), closeSoftKeyboard())
+
+        onView(
             allOf(
-                withId(R.id.fullNameEt),
+                withId(R.id.text_input_end_icon), withContentDescription("Show password"),
                 childAtPosition(
                     childAtPosition(
-                        withClassName(`is`("android.widget.ScrollView")),
-                        0
+                        withClassName(`is`("android.widget.LinearLayout")),
+                        1
                     ),
                     0
-                )
+                ),
+                isDisplayed()
             )
-        )
-        appCompatEditText.perform(scrollTo(), replaceText("name"), closeSoftKeyboard())
+        ).perform(click())
 
-        val appCompatEditText2 = onView(
-            allOf(
-                withId(R.id.usernameEt),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("android.widget.ScrollView")),
-                        0
-                    ),
-                    1
-                )
-            )
-        )
-        appCompatEditText2.perform(scrollTo(), replaceText("test"), closeSoftKeyboard())
-
-        val appCompatEditText3 = onView(
-            allOf(
-                withId(R.id.passwordEt),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("android.widget.ScrollView")),
-                        0
-                    ),
-                    2
-                )
-            )
-        )
-        appCompatEditText3.perform(scrollTo(), replaceText("digital@1"), closeSoftKeyboard())
-
-        val customizableGenericButton = onView(
+        onView(
             allOf(
                 withId(R.id.signUpButton),
                 childAtPosition(
@@ -130,14 +110,12 @@ class SplashActivityTest {
                     3
                 )
             )
-        )
-        customizableGenericButton.perform(scrollTo(), click())
+        ).perform(scrollTo(), click())
 
+        onView(withId(R.id.userNameTil)).check(matches(isDisplayed()))
+        onView(withId(R.id.passwordTil)).check(matches(isDisplayed()))
 
-        onView(withId(R.id.usernameEt)).check(matches(isDisplayed()))
-        onView(withId(R.id.passwordEt)).check(matches(isDisplayed()))
-
-        val linearLayout3 = onView(
+        onView(
             allOf(
                 withId(R.id.customGenericButtonContainer),
                 withParent(
@@ -148,38 +126,37 @@ class SplashActivityTest {
                 ),
                 isDisplayed()
             )
-        )
-        linearLayout3.check(matches(isDisplayed()))
+        ).check(matches(isDisplayed()))
 
-        val appCompatEditText4 = onView(
+        onView(
             allOf(
-                withId(R.id.usernameEt),
+                withId(R.id.customizableButtonTitleTv), withText("Login"),
+                withParent(withParent(withId(R.id.customGenericButtonContainer))),
+                isDisplayed()
+            )
+        ).check(matches(withText("Login")))
+
+        onView(withId(R.id.inputUserName))
+            .perform(scrollTo(), replaceText("joe"), closeSoftKeyboard())
+
+        onView(withId(R.id.inputPassword))
+            .perform(scrollTo(), replaceText("Android@2021"), closeSoftKeyboard())
+
+        onView(
+            allOf(
+                withId(R.id.text_input_end_icon), withContentDescription("Show password"),
                 childAtPosition(
                     childAtPosition(
-                        withClassName(`is`("android.widget.ScrollView")),
-                        0
+                        withClassName(`is`("android.widget.LinearLayout")),
+                        1
                     ),
                     0
-                )
+                ),
+                isDisplayed()
             )
-        )
-        appCompatEditText4.perform(scrollTo(), replaceText("test"), closeSoftKeyboard())
+        ).perform(click())
 
-        val appCompatEditText5 = onView(
-            allOf(
-                withId(R.id.passwordEt),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("android.widget.ScrollView")),
-                        0
-                    ),
-                    1
-                )
-            )
-        )
-        appCompatEditText5.perform(scrollTo(), replaceText("digital@1"), closeSoftKeyboard())
-
-        val customizableGenericButton2 = onView(
+        onView(
             allOf(
                 withId(R.id.loginButton),
                 childAtPosition(
@@ -190,10 +167,9 @@ class SplashActivityTest {
                     2
                 )
             )
-        )
-        customizableGenericButton2.perform(scrollTo(), click())
+        ).perform(scrollTo(), click())
 
-        val linearLayout4 = onView(
+        onView(
             allOf(
                 withId(R.id.customGenericButtonContainer),
                 withParent(
@@ -204,37 +180,10 @@ class SplashActivityTest {
                 ),
                 isDisplayed()
             )
-        )
-        linearLayout4.check(matches(isDisplayed()))
+        ).check(matches(isDisplayed()))
 
-        val customizableGenericButton3 = onView(
-            allOf(
-                withId(R.id.logoutBtn),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("android.widget.ScrollView")),
-                        0
-                    ),
-                    5
-                )
-            )
-        )
-        customizableGenericButton3.perform(scrollTo(), click())
 
-        val linearLayout5 = onView(
-            allOf(
-                withId(R.id.customGenericButtonContainer),
-                withParent(
-                    allOf(
-                        withId(R.id.signUpButton),
-                        withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))
-                    )
-                ),
-                isDisplayed()
-            )
-        )
-        linearLayout5.check(matches(isDisplayed()))
-
+        onView(withId(R.id.logoutBtn)).perform(scrollTo(), click())
     }
 
     private fun childAtPosition(

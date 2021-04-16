@@ -8,6 +8,8 @@ import androidx.security.crypto.MasterKey
 import com.example.sample.app.database.AppDatabase
 import com.example.sample.app.database.DatabaseRepository
 import com.example.sample.app.database.UserDao
+import com.example.sample.app.utils.DB_NAME
+import com.example.sample.app.utils.SHARED_PREF_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +27,7 @@ object SampleAppModule {
         return Room.databaseBuilder(
                 appContext,
                 AppDatabase::class.java,
-                "customised-button-sample-app-db"
+                DB_NAME
         ).build()
     }
 
@@ -46,7 +48,7 @@ object SampleAppModule {
 
         return EncryptedSharedPreferences.create(
                 appContext,
-                "SHARED_PREF_NAME",
+                SHARED_PREF_NAME,
                 masterKey,
                 EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
