@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Sample App</string>
+    <string name="title_login">Login</string>
+    <string name="prompt_full_name">Full Name</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_password">Password must contain
+        \n minimum 8 characters,
+        \n 1 lower case letter,
+        \n 1 upper case letter,
+        \n 1 number, and
+        \n 1 special character.
+    </string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="sigup">Sign Up</string>
+    <string name="please_wait">Please wait …</string>
+    <string name="session_expired">Your session has expired.</string>
+    <string name="failure_occurred">Failure occurred</string>
+    <string name="something_went_wrong">User name or password is incorrect. Try again.</string>
+    <string name="ok">OK</string>
+    <string name="logout">Logout</string>
+    <string name="home_screen_title">Home Screen</string>
+
 </resources>
