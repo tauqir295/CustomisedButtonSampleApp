@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sample.app.database.DatabaseRepository
 import com.example.sample.app.utils.Resource
+import com.example.sample.app.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,12 +17,14 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val repository: DatabaseRepository) : ViewModel() {
+    private val _navigateToDetails = SingleLiveEvent<Resource<String>>()
+
     var userName: String? = null
     var password: String? = null
-    var hasDataBeenObservedOnce = false // use this variable to help in observing only once. Helpful in device orientation change.
+    var hasDataBeenObservedOnce = true // use this variable to help in observing only once. Helpful in device orientation change.
     private val _userData = MutableLiveData<Resource<String>>()
     val userData: LiveData<Resource<String>>
-        get() = _userData
+        get() = _navigateToDetails
 
     fun loginUser() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -29,10 +32,10 @@ class LoginViewModel @Inject constructor(private val repository: DatabaseReposit
                 password?.let { password ->
                     try {
                         repository.getUser(userName, password)?.let {
-                            _userData.postValue(Resource.success(it))
-                        } ?: _userData.postValue(Resource.error("Failure occurred", null))
+                            _navigateToDetails.postValue(Resource.success(it))
+                        } ?: _navigateToDetails.postValue(Resource.error("Failure occurred", null))
                     } catch (e: Exception) {
-                        _userData.postValue(Resource.error("Failure occurred", null))
+                        _navigateToDetails.postValue(Resource.error("Failure occurred", null))
                     }
                 }
             }

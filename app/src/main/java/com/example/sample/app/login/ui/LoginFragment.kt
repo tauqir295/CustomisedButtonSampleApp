@@ -80,7 +80,7 @@ class LoginFragment : Fragment() {
                             showGenericErrorMessage(requireActivity() as AppCompatActivity)
                         }
                     }
-                    hasDataBeenObservedOnce = false
+//                    hasDataBeenObservedOnce = false
                 }
 
             })
