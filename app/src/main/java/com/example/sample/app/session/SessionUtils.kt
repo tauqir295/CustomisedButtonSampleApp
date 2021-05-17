@@ -1,6 +1,6 @@
 package com.example.sample.app.session
 
-import com.example.sample.app.session.SessionWorkManager.Companion.DEFAULT_INTERACTION_COUNTER
+import com.example.sample.app.session.SessionWorker.Companion.DEFAULT_INTERACTION_COUNTER
 
 internal object SessionUtils {
 

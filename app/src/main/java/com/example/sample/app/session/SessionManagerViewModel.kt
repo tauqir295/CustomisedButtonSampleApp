@@ -6,9 +6,9 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
-import com.example.sample.app.session.SessionWorkManager.Companion.DEFAULT_INTERACTION_COUNTER
-import com.example.sample.app.session.SessionWorkManager.Companion.ID_SESSION_TIMEOUT_WORK
-import com.example.sample.app.session.SessionWorkManager.Companion.SESSION_TIMEOUT_TAG
+import com.example.sample.app.session.SessionWorker.Companion.DEFAULT_INTERACTION_COUNTER
+import com.example.sample.app.session.SessionWorker.Companion.ID_SESSION_TIMEOUT_WORK
+import com.example.sample.app.session.SessionWorker.Companion.SESSION_TIMEOUT_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -24,7 +24,7 @@ class SessionManagerViewModel @Inject constructor(private val workManager: WorkM
      * track the session from work manager
      */
     fun startTrackingSession() {
-        val save = OneTimeWorkRequest.Builder(SessionWorkManager::class.java)
+        val save = OneTimeWorkRequest.Builder(SessionWorker::class.java)
             .addTag(SESSION_TIMEOUT_TAG)
             .build()
 

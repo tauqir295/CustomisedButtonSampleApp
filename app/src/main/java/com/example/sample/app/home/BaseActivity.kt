@@ -10,9 +10,9 @@ import com.example.sample.app.login.ui.LoginActivity
 import com.example.sample.app.session.SessionManagerViewModel
 import com.example.sample.app.session.SessionTimeOut
 import com.example.sample.app.session.SessionUtils
-import com.example.sample.app.session.SessionWorkManager.Companion.DEFAULT_INTERACTION_COUNTER
-import com.example.sample.app.session.SessionWorkManager.Companion.SESSION_TIMEOUT_RESULT_KEY
-import com.example.sample.app.session.SessionWorkManager.Companion.ZERO
+import com.example.sample.app.session.SessionWorker.Companion.DEFAULT_INTERACTION_COUNTER
+import com.example.sample.app.session.SessionWorker.Companion.SESSION_TIMEOUT_RESULT_KEY
+import com.example.sample.app.session.SessionWorker.Companion.ZERO
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -5,7 +5,7 @@ import androidx.work.Data
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 
-class SessionWorkManager(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+class SessionWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
     override fun doWork(): Result {
         var timeLeftInSession = SESSION_TIME_OUT
